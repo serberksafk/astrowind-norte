@@ -1,11 +1,832 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import TelectrichLayout from '~/layouts/TelectrichLayout.astro';
+import { CONTACTO } from '~/data/sitio';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Contacto' };
+const metadata = {
+  title: 'Cotiza tu tablero eléctrico industrial',
+  description:
+    'Solicita la cotización de tu tablero eléctrico industrial. Respondemos en 1 día y cotizamos en 48 horas.',
+  ignoreTitleTemplate: true,
+};
+
+const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const whatsappUrl = `${CONTACTO.whatsapp}`;
+
+const whatsappIconPath =
+  'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z';
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Contacto" />
-</Layout>
+<TelectrichLayout metadata={metadata} bar={false}>
+  <section class="band band--noche band--hero-corto" aria-labelledby="contacto-h1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 contacto-hero">
+      <h1 id="contacto-h1" class="contacto-h1">
+        Cotiza tu tablero eléctrico <mark class="acento">industrial</mark>
+      </h1>
+      <p class="contacto-bajada">
+        Cuéntanos para qué sector es el tablero y qué gama buscas. Respondemos tu consulta en 1 día y entregamos la
+        cotización en 48 horas, con el suministro y las pruebas claramente definidos.
+      </p>
+      <p class="contacto-tags">
+        <span class="contacto-tag">respuesta en 1 día</span>
+        <span class="contacto-tag">cotización en 48 h</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="band band--blanco">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 contacto-grid">
+      <div class="contacto-form-col">
+        {
+          !formEndpoint && (
+            <div class="contacto-wa-aside" aria-labelledby="contacto-wa-h2">
+              <h2 id="contacto-wa-h2">Escríbenos por WhatsApp</h2>
+              <p>
+                Escríbenos y cuéntanos qué necesitas. ¿Tienes un plano o una especificación? Envíalo por el mismo chat o
+                a ventas@atingenieria.com.
+              </p>
+              <a class="contacto-btn-wa contacto-btn-wa--lg" href={whatsappUrl} data-wa="contacto">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={whatsappIconPath} />
+                </svg>
+                Escribir por WhatsApp · {CONTACTO.telefono}
+              </a>
+            </div>
+          )
+        }
+
+        {
+          formEndpoint && (
+            <form id="cotiza" class="contacto-form" novalidate>
+              <p class="contacto-form-legend">Los campos con asterisco (*) son obligatorios.</p>
+
+              <div class="contacto-field">
+                <label for="nombre">Nombre *</label>
+                <input id="nombre" name="nombre" type="text" required autocomplete="name" />
+                <p class="contacto-err" id="nombre-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="correo">Correo *</label>
+                <input
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  inputmode="email"
+                  aria-describedby="correo-h"
+                />
+                <p class="contacto-help" id="correo-h">
+                  Aquí te enviamos la respuesta.
+                </p>
+                <p class="contacto-err" id="correo-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="area">Área de desempeño del tablero *</label>
+                <select id="area" name="area" required>
+                  <option value="">Selecciona…</option>
+                  <option>Minería</option>
+                  <option>Energía</option>
+                  <option>Alimentos</option>
+                  <option>Manufactura</option>
+                  <option>Otro</option>
+                </select>
+                <p class="contacto-err" id="area-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="gama">Gama *</label>
+                <select id="gama" name="gama" required aria-describedby="gama-h">
+                  <option value="">Selecciona…</option>
+                  <option>Alta</option>
+                  <option>Media</option>
+                  <option>Económica</option>
+                </select>
+                <p class="contacto-help" id="gama-h">
+                  Alta usa componentes premium de alta calidad del mercado y cuesta más; Media y Económica bajan en esa
+                  proporción.
+                </p>
+                <p class="contacto-err" id="gama-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="tel">
+                  Teléfono <span class="contacto-opt">(opcional)</span>
+                </label>
+                <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" />
+                <p class="contacto-err" id="tel-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="empresa">
+                  Empresa <span class="contacto-opt">(opcional)</span>
+                </label>
+                <input id="empresa" name="empresa" type="text" autocomplete="organization" />
+              </div>
+
+              <div class="contacto-field">
+                <label for="ubic">
+                  Ubicación del tablero <span class="contacto-opt">(opcional)</span>
+                </label>
+                <select id="ubic" name="ubic" aria-describedby="ubic-h">
+                  <option value="">Selecciona…</option>
+                  <option>Interior</option>
+                  <option>Exterior</option>
+                  <option>Corrosivo</option>
+                </select>
+                <p class="contacto-help" id="ubic-h">
+                  Dónde se instalará.
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <label for="mensaje">
+                  Mensaje <span class="contacto-opt">(opcional)</span>
+                </label>
+                <textarea id="mensaje" name="mensaje" rows="4" aria-describedby="mensaje-h" />
+                <p class="contacto-help" id="mensaje-h">
+                  Tipo de tablero, cargas o señales y fecha estimada.
+                </p>
+              </div>
+
+              <div class="contacto-field">
+                <span class="contacto-label-text" id="ar-l">
+                  Plano o especificación <span class="contacto-opt">(opcional)</span>
+                </span>
+                <div class="contacto-file">
+                  <input
+                    id="archivo"
+                    name="archivo"
+                    type="file"
+                    accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg,.xlsx"
+                    aria-describedby="ar-h"
+                  />
+                  <label class="contacto-btn-secondary contacto-btn-file" for="archivo">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M16 9.5 9.5 16a4 4 0 0 1-5.7-5.7l7-7a2.7 2.7 0 0 1 3.8 3.8l-7 7a1.3 1.3 0 0 1-1.9-1.9L11 6" />
+                    </svg>
+                    Adjuntar archivo
+                  </label>
+                  <span id="archivo-nombre" class="contacto-file-name" aria-live="polite">
+                    Ningún archivo seleccionado
+                  </span>
+                </div>
+                <p class="contacto-help" id="ar-h">
+                  Un archivo de hasta 10 MB: PDF, DWG, DXF, PNG, JPG o XLSX. No aceptamos ZIP.
+                </p>
+                <p class="contacto-err" id="archivo-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <div class="contacto-check">
+                <input id="consent" name="consent" type="checkbox" required />
+                <label for="consent">
+                  Acepto la <a href="/privacidad/">política de privacidad</a>. *
+                </label>
+                <p class="contacto-err" id="consent-e" role="alert" hidden>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6.5" />
+                    <path d="M8 4.5v4M8 11v.1" />
+                  </svg>
+                  <span />
+                </p>
+              </div>
+
+              <button type="submit" class="contacto-btn-submit">
+                Solicitar cotización
+              </button>
+
+              <p class="contacto-err contacto-err--global" id="form-e" role="alert" hidden>
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="8" r="6.5" />
+                  <path d="M8 4.5v4M8 11v.1" />
+                </svg>
+                <span />
+              </p>
+
+              <noscript>
+                <p class="contacto-noscript">
+                  Para enviar el formulario necesitas activar JavaScript. Mientras tanto, escríbenos por WhatsApp al{' '}
+                  {CONTACTO.telefono}, llámanos o escribe a {CONTACTO.correo}.
+                </p>
+              </noscript>
+            </form>
+          )
+        }
+
+        <div class="contacto-ok" id="form-ok" role="status" tabindex="-1" hidden>
+          <h2>Recibimos tu solicitud.</h2>
+          <p>Te responderemos en 1 día.</p>
+        </div>
+      </div>
+
+      <aside class="contacto-aside" aria-label="Contacto directo">
+        <div class="contacto-aside-card">
+          <h2>Contacto directo</h2>
+          <dl class="contacto-quick">
+            <div>
+              <dt>Correo</dt>
+              <dd><a href={`mailto:${CONTACTO.correo}`}>{CONTACTO.correo}</a></dd>
+            </div>
+            <div>
+              <dt>Teléfono / WhatsApp</dt>
+              <dd>
+                <a href={whatsappUrl} data-wa="contacto">{CONTACTO.telefono}</a>
+              </dd>
+            </div>
+            <div>
+              <dt>Taller</dt>
+              <dd>{CONTACTO.taller}</dd>
+            </div>
+            <div>
+              <dt>Horario</dt>
+              <dd>{CONTACTO.horario}</dd>
+            </div>
+          </dl>
+          <a class="contacto-btn-wa" href={whatsappUrl} data-wa="contacto">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d={whatsappIconPath}></path>
+            </svg>
+            Escribir por WhatsApp
+          </a>
+          <p class="contacto-aside-links">
+            <a class="contacto-lnk" href="/soluciones/">Soluciones eléctricas industriales</a>
+            <a class="contacto-lnk" href="/pruebas-fat-sat-y-comisionamiento/"> Pruebas FAT y SAT </a>
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</TelectrichLayout>
+
+<script>
+  import { initFormulario } from '~/scripts/formulario';
+  const start = () => initFormulario();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+  document.addEventListener('astro:page-load', start);
+</script>
+
+<style>
+  /* Hide barra inferior and flotante on this page (sin barra inferior ni flotante, UX §4.9) */
+  :global(#barra-fija),
+  :global(#whatsapp-flotante) {
+    display: none !important;
+  }
+
+  .band--hero-corto {
+    padding-block: clamp(64px, 9vw, 128px);
+  }
+
+  .contacto-hero {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 62ch;
+  }
+
+  .contacto-h1 {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: -0.024em;
+    line-height: 1.04;
+    font-size: clamp(2rem, 1.1rem + 3.4vw, 3.75rem);
+    margin: 0;
+  }
+
+  .contacto-bajada {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .contacto-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .contacto-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 1.75rem;
+    padding: 0 0.625rem;
+    background-color: var(--color-acento);
+    color: var(--color-noche);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    border-radius: 2px;
+  }
+
+  /* Form area */
+  .contacto-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .contacto-grid {
+      grid-template-columns: 7fr 5fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .contacto-form-col {
+    min-width: 0;
+  }
+
+  .contacto-form-legend {
+    color: var(--color-cuerpo);
+    font-size: 0.9375rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contacto-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .contacto-field label,
+  .contacto-label-text {
+    color: var(--color-noche);
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .contacto-opt {
+    color: var(--color-cuerpo);
+    font-weight: 400;
+  }
+
+  .contacto-field input,
+  .contacto-field select,
+  .contacto-field textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    color: var(--color-noche);
+    background-color: #ffffff;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 1rem;
+    line-height: 1.4;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .contacto-field textarea {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  .contacto-field input:focus,
+  .contacto-field select:focus,
+  .contacto-field textarea:focus {
+    outline: none;
+    border-color: var(--color-noche);
+    box-shadow: 0 0 0 3px rgba(21, 44, 61, 0.45);
+  }
+
+  .contacto-field [aria-invalid='true'] {
+    border-color: #c43d3d;
+    box-shadow: 0 0 0 3px rgba(196, 61, 61, 0.25);
+  }
+
+  .contacto-help {
+    color: var(--color-cuerpo);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .contacto-err {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: #c43d3d;
+    font-size: 0.8125rem;
+    margin: 0;
+  }
+
+  .contacto-err svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .contacto-err--global {
+    margin-top: 0.25rem;
+  }
+
+  .contacto-file {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .contacto-file input[type='file'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .contacto-btn-file {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    min-height: 44px;
+    padding: 0 1rem;
+    background-color: var(--color-noche);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 0;
+  }
+
+  .contacto-btn-file:hover {
+    background-color: var(--color-noche-2);
+  }
+
+  .contacto-btn-file svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .contacto-file-name {
+    color: var(--color-cuerpo);
+    font-size: 0.9375rem;
+  }
+
+  .contacto-check {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.5rem 0.625rem;
+  }
+
+  .contacto-check input[type='checkbox'] {
+    margin-top: 0.2rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-noche);
+  }
+
+  .contacto-check label {
+    font-size: 0.9375rem;
+    color: var(--color-noche);
+    line-height: 1.45;
+  }
+
+  .contacto-check a {
+    color: var(--color-noche);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contacto-check .contacto-err {
+    grid-column: 2;
+  }
+
+  .contacto-btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 1.25rem;
+    background-color: var(--color-noche);
+    color: #ffffff;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    align-self: start;
+  }
+
+  .contacto-btn-submit:hover:not(:disabled) {
+    background-color: var(--color-noche-2);
+  }
+
+  .contacto-btn-submit:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(21, 44, 61, 0.55);
+  }
+
+  .contacto-btn-submit:disabled {
+    opacity: 0.65;
+    cursor: progress;
+  }
+
+  .contacto-noscript {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    color: var(--color-noche);
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  .contacto-ok {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    padding: 1.75rem 1.5rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .contacto-ok h2 {
+    color: var(--color-noche);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .contacto-ok p {
+    color: var(--color-cuerpo);
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+
+  /* Aside card: dark panel, sticky on desktop */
+  .contacto-aside {
+    position: relative;
+    align-self: start;
+  }
+
+  @media (min-width: 1024px) {
+    .contacto-aside {
+      position: sticky;
+      top: calc(64px + 1.5rem);
+    }
+  }
+
+  .contacto-aside-card {
+    background-color: var(--color-noche);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 1.75rem 1.5rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .contacto-aside-card h2 {
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .contacto-quick {
+    display: grid;
+    gap: 0.875rem;
+    margin: 0;
+  }
+
+  .contacto-quick > div {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .contacto-quick dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
+
+  .contacto-quick dd {
+    color: #ffffff;
+    font-size: 0.9375rem;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .contacto-quick a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contacto-quick a:hover {
+    color: var(--color-acento);
+  }
+
+  .contacto-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 1.25rem;
+    background-color: var(--color-acento);
+    color: var(--color-noche);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .contacto-btn-wa:hover {
+    background-color: rgba(255, 203, 8, 0.88);
+  }
+
+  .contacto-btn-wa:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 203, 8, 0.55);
+  }
+
+  .contacto-btn-wa svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .contacto-btn-wa--lg {
+    min-height: 56px;
+    font-size: 1.0625rem;
+    padding: 0 1.5rem;
+  }
+
+  .contacto-aside-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding-top: 0.25rem;
+  }
+
+  .contacto-lnk {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-size: 0.875rem;
+  }
+
+  .contacto-lnk:hover {
+    color: var(--color-acento);
+  }
+
+  /* WhatsApp-aside card visible when form endpoint is empty (variant: solo WhatsApp) */
+  .contacto-wa-aside {
+    background-color: var(--color-noche);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 1.75rem 1.5rem;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .contacto-wa-aside h2 {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .contacto-wa-aside p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contacto-field input,
+    .contacto-field select,
+    .contacto-field textarea,
+    .contacto-btn-submit,
+    .contacto-btn-wa,
+    .contacto-btn-file {
+      transition: none;
+    }
+  }
+</style>
