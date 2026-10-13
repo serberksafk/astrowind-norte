@@ -228,8 +228,8 @@
 /* Current page in the header navigation (set server-side in Header.astro and
    kept in sync on client-side navigations). Override --aw-color-link in
    CustomStyles.astro to change the colour. */
-#header nav .aw-link-active {
-  @apply text-link;
+#header nav a.aw-link-active.py-3 {
+  color: var(--color-acento);
 }
 
 .dd *:first-child {
