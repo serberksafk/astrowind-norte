@@ -1,12 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Logo from '~/components/Logo.astro';
-import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import Button from '~/components/ui/Button.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
-import { trimSlash, getAsset } from '~/utils/permalinks';
+import { trimSlash } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
 
 interface Link {
@@ -46,16 +43,8 @@ const {
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
-// Compare paths without trailing slashes so the active link is detected
-// regardless of the `trailingSlash` setting (`getPermalink()` emits `/contact/`
-// when it is enabled, while `currentPath` above never has one, see #557).
 const isActive = (href?: string) => typeof href === 'string' && `/${trimSlash(href)}` === currentPath;
 
-// The header is kept across view transitions (transition:persist) so its state
-// survives client-side navigations. Astro matches persisted elements by name,
-// so the name must change whenever the header content does: otherwise a page
-// with its own menu (the demo homes, the landing pages) would keep showing the
-// header of the page the visitor came from. Hash the props that shape the markup.
 const persistKey = `header-${Array.from(
   JSON.stringify({ links, actions, isSticky, isDark, isFullWidth, showToggleTheme, showRssFeed, position })
 )
@@ -66,16 +55,15 @@ const persistKey = `header-${Array.from(
 <aw-header transition:persist={persistKey}>
   <header
     class:list={[
-      { sticky: isSticky, relative: !isSticky, dark: isDark },
-      'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+      { sticky: isSticky, relative: !isSticky },
+      'top-0 z-40 flex-none mx-auto w-full bg-noche transition-[opacity] ease-in-out h-16',
     ]}
     {...isSticky ? { 'data-aw-sticky-header': true } : {}}
     {...id ? { id } : {}}
   >
-    <div class="absolute inset-0"></div>
     <div
       class:list={[
-        'relative text-default py-3 px-3 lg:px-6 mx-auto w-full',
+        'relative text-white h-full px-4 lg:px-6 mx-auto w-full',
         {
           'lg:flex lg:justify-between': position !== 'center',
         },
@@ -87,43 +75,68 @@ const persistKey = `header-${Array.from(
         },
       ]}
     >
-      <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
+      <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between items-center w-full lg:w-auto h-16']}>
         <a class="flex items-center" href={getHomePermalink()}>
-          <Logo />
+          <img
+            src="/logo/TLT_H_Diapo.png"
+            alt="Telectrich"
+            width="134"
+            height="32"
+            class="h-8 w-auto"
+          />
         </a>
-        <div class="flex items-center lg:hidden">
-          <ToggleMenu />
+        <div class="flex items-center gap-3 lg:hidden">
+          {actions?.length ? (
+            actions.map((btnProps) => (
+              <a
+                href={btnProps.href}
+                class="inline-flex items-center justify-center h-11 px-4 bg-acento text-noche font-semibold text-sm rounded-md"
+              >
+                {btnProps.text}
+              </a>
+            ))
+          ) : ''}
+          <button
+            type="button"
+            class="flex items-center justify-center w-11 h-11 text-white"
+            aria-label="Abrir menú"
+            data-aw-toggle-menu
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
       </div>
       <nav
-        class="items-center w-full lg:w-auto hidden lg:flex lg:mx-5 text-default overflow-y-auto overflow-x-hidden lg:overflow-visible lg:justify-self-center"
+        class="hidden lg:flex items-center w-full lg:w-auto lg:mx-5 lg:justify-self-center"
         aria-label="Main navigation"
       >
         <ul
-          class="flex flex-col lg:flex-row lg:self-center w-full lg:w-auto text-xl lg:text-[0.9375rem] tracking-[0.01rem] font-medium lg:justify-center"
+          class="flex flex-row lg:self-center w-full lg:w-auto text-[0.9375rem] tracking-[0.01rem] font-medium lg:justify-center"
         >
           {
             links.map(({ text, href, links }) => (
-              <li class={links?.length ? 'dropdown' : ''}>
+              <li class={links?.length ? 'dropdown relative' : ''}>
                 {links?.length ? (
                   <>
                     <button
                       type="button"
-                      class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
+                      class="hover:text-acento px-4 py-3 flex items-center whitespace-nowrap text-white"
                     >
                       {text}{' '}
                       <Icon
                         name="tabler:chevron-down"
-                        class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden lg:inline"
+                        class="w-3.5 h-3.5 ml-0.5"
                       />
                     </button>
-                    <ul class="dropdown-menu lg:backdrop-blur-md dark:lg:bg-slate-900 dark:lg:border dark:lg:border-slate-700/50 rounded lg:absolute pl-4 lg:pl-0 lg:hidden font-medium lg:bg-white/90 lg:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu lg:absolute pl-4 lg:pl-0 lg:hidden font-medium lg:bg-noche-2 lg:min-w-[200px] drop-shadow-xl lg:rounded-md lg:border lg:border-white/10">
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a
                             class:list={[
-                              'first:rounded-t last:rounded-b lg:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-nowrap',
-                              { 'aw-link-active': isActive(href2) },
+                              'first:rounded-t last:rounded-b lg:hover:bg-white/10 py-2 px-5 block whitespace-nowrap text-white',
+                              { 'aw-link-active text-acento': isActive(href2) },
                             ]}
                             href={href2}
                           >
@@ -136,8 +149,8 @@ const persistKey = `header-${Array.from(
                 ) : (
                   <a
                     class:list={[
-                      'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
-                      { 'aw-link-active': isActive(href) },
+                      'hover:text-acento px-4 py-3 flex items-center whitespace-nowrap text-white',
+                      { 'aw-link-active text-acento': isActive(href) },
                     ]}
                     href={href}
                   >
@@ -152,29 +165,20 @@ const persistKey = `header-${Array.from(
       <div
         class:list={[
           { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-          'hidden lg:self-center lg:flex items-center lg:mb-0 fixed w-full lg:w-auto lg:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 lg:p-0 lg:justify-self-end',
+          'hidden lg:flex items-center lg:mb-0 fixed w-full lg:w-auto lg:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 lg:p-0 lg:justify-self-end',
         ]}
       >
-        <div class="items-center flex justify-between w-full lg:w-auto">
-          <div class="flex">
-            {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 lg:w-5 lg:h-5 lg:inline-block" />}
-            {
-              showRssFeed && (
-                <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-                  aria-label="RSS Feed"
-                  href={getAsset('/rss.xml')}
-                >
-                  <Icon name="tabler:rss" class="w-5 h-5" />
-                </a>
-              )
-            }
-          </div>
+        <div class="items-center flex justify-end w-full lg:w-auto">
           {
             actions?.length ? (
               <span class="ml-4 rtl:ml-0 rtl:mr-4">
                 {actions.map((btnProps) => (
-                  <Button {...btnProps} class="ml-2 py-2.5 px-5.5 lg:px-6 font-semibold shadow-none text-sm w-auto" />
+                  <a
+                    href={btnProps.href}
+                    class="inline-flex items-center justify-center h-11 px-6 bg-acento text-noche font-semibold text-sm rounded-md transition-colors hover:bg-acento/90"
+                  >
+                    {btnProps.text}
+                  </a>
                 ))}
               </span>
             ) : (
@@ -184,12 +188,93 @@ const persistKey = `header-${Array.from(
         </div>
       </div>
     </div>
+
+    <nav
+      id="mobile-menu"
+      class="lg:hidden fixed inset-0 top-16 bg-noche hidden flex-col items-center justify-center gap-4"
+      aria-label="Mobile navigation"
+    >
+      <ul class="flex flex-col items-center gap-2 text-xl font-medium">
+        {
+          links.map(({ text, href, links }) => (
+            <li class={links?.length ? 'dropdown' : ''}>
+              {links?.length ? (
+                <>
+                  <button
+                    type="button"
+                    class="hover:text-acento px-4 py-3 flex items-center whitespace-nowrap text-white"
+                  >
+                    {text}
+                  </button>
+                  <ul class="dropdown-menu pl-4">
+                    {links.map(({ text: text2, href: href2 }) => (
+                      <li>
+                        <a
+                          class:list={[
+                            'hover:text-acento py-2 px-5 block whitespace-nowrap text-white',
+                            { 'aw-link-active text-acento': isActive(href2) },
+                          ]}
+                          href={href2}
+                        >
+                          {text2}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a
+                  class:list={[
+                    'hover:text-acento px-4 py-3 flex items-center whitespace-nowrap text-white',
+                    { 'aw-link-active text-acento': isActive(href) },
+                  ]}
+                  href={href}
+                >
+                  {text}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+      {
+        actions?.length ? (
+          <div class="flex flex-col gap-3 mt-4 w-48">
+            {actions.map((btnProps) => (
+              <a
+                href={btnProps.href}
+                class="inline-flex items-center justify-center h-12 px-6 bg-acento text-noche font-semibold text-sm rounded-md"
+              >
+                {btnProps.text}
+              </a>
+            ))}
+          </div>
+        ) : (
+          ''
+        )
+      }
+    </nav>
   </header>
 </aw-header>
 
 <style>
   aw-header {
     display: contents;
+  }
+
+  #mobile-menu {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.2s ease-out;
+  }
+
+  #mobile-menu:not(.hidden) {
+    clip-path: inset(0 0 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-menu {
+      transition: none;
+    }
   }
 </style>
 
@@ -206,12 +291,8 @@ const persistKey = `header-${Array.from(
     connectedCallback() {
       const header = this.querySelector<HTMLElement>('#header');
       const toggle = this.querySelector<HTMLElement>('[data-aw-toggle-menu]');
-      const nav = this.querySelector<HTMLElement>('#header nav');
-      const lastChild = this.querySelector<HTMLElement>('#header > div > div:last-child');
+      const mobileMenu = this.querySelector<HTMLElement>('#mobile-menu');
 
-      // The header persists across view transitions (transition:persist), so
-      // the server-rendered `aw-link-active` class would go stale. Re-compute it
-      // on every navigation (astro:page-load fires on load and after each swap).
       this.updateActiveLinks();
       document.addEventListener('astro:page-load', this.onPageLoad);
 
@@ -219,42 +300,31 @@ const persistKey = `header-${Array.from(
         toggle?.classList.remove('expanded');
         toggle?.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('overflow-hidden');
-        header?.classList.remove('h-screen', 'expanded', 'bg-page');
-        nav?.classList.add('hidden');
-        lastChild?.classList.add('hidden');
+        mobileMenu?.classList.add('hidden');
+        mobileMenu?.classList.remove('flex');
       };
 
-      // Mobile menu toggle.
       toggle?.addEventListener('click', () => {
         const expanded = toggle.classList.toggle('expanded');
         toggle.setAttribute('aria-expanded', String(expanded));
         document.body.classList.toggle('overflow-hidden');
-        header?.classList.toggle('h-screen');
-        header?.classList.toggle('expanded');
-        header?.classList.toggle('bg-page');
-        nav?.classList.toggle('hidden');
-        lastChild?.classList.toggle('hidden');
+        mobileMenu?.classList.toggle('hidden');
+        mobileMenu?.classList.toggle('flex');
       });
 
-      // Close the mobile menu when a nav link is clicked.
-      nav?.addEventListener('click', closeMenu);
-
-      // Desktop dropdowns open on hover/`:focus-within`. When a dropdown link is
-      // clicked it keeps focus, and because the header uses `transition:persist`
-      // the dropdown would stay open after the client-side navigation. Blur the
-      // link on click so it closes right away (the `astro:page-load` handler is
-      // the safety net if focus is restored during the swap).
-      nav?.addEventListener('click', (e) => {
-        const link = (e.target as HTMLElement)?.closest<HTMLElement>('.dropdown-menu a');
-        if (link) link.blur();
+      mobileMenu?.addEventListener('click', (e) => {
+        const link = (e.target as HTMLElement)?.closest('a');
+        if (link) {
+          closeMenu();
+        }
       });
 
-      // Close it when leaving the mobile/tablet breakpoint (desktop nav starts at `lg`).
-      this.mql = window.matchMedia('(max-width: 1023px)');
-      this.onMqlChange = () => closeMenu();
+      this.mql = window.matchMedia('(min-width: 1024px)');
+      this.onMqlChange = () => {
+        if (this.mql && this.mql.matches) closeMenu();
+      };
       this.mql.addEventListener('change', this.onMqlChange);
 
-      // Sticky header: toggle the `scroll` class past a small threshold.
       if (header?.hasAttribute('data-aw-sticky-header')) {
         let ticking = false;
         const applyStyles = () => {
@@ -281,9 +351,6 @@ const persistKey = `header-${Array.from(
       document.removeEventListener('astro:page-load', this.onPageLoad);
     }
 
-    // With `transition:persist` the header (and its focus) survives client-side
-    // navigations, so a clicked dropdown link keeps `:focus-within` and its menu
-    // would stay open on the next page. Drop the focus so the CSS closes it.
     private closeOpenDropdown() {
       const active = document.activeElement as HTMLElement | null;
       if (active && this.contains(active) && active.closest('.dropdown')) active.blur();
@@ -292,10 +359,8 @@ const persistKey = `header-${Array.from(
     private updateActiveLinks() {
       const norm = (p: string) => '/' + p.replace(/^\/+|\/+$/g, '');
       const current = norm(window.location.pathname);
-      this.querySelectorAll<HTMLAnchorElement>('nav a[href]').forEach((a) => {
+      this.querySelectorAll<HTMLAnchorElement>('nav a[href], #mobile-menu a[href]').forEach((a) => {
         const url = new URL(a.href, window.location.href);
-        // Anchor-only links (`#`, `/#features`) resolve to the current page and
-        // would light up everywhere; only path links can be "the current page".
         const isPathLink =
           url.origin === window.location.origin && !url.hash && !a.getAttribute('href')?.startsWith('#');
         a.classList.toggle('aw-link-active', isPathLink && norm(url.pathname) === current);

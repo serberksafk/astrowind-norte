@@ -1,0 +1,77 @@
+---
+export interface Props {
+  pasos: { titulo: string; descripcion: string }[];
+}
+
+const { pasos } = Astro.props;
+---
+
+<ol class="riel">
+  {pasos.map((paso, i) => (
+    <li class="riel-paso">
+      <span class="riel-nodo">{i + 1}</span>
+      <h3 class="riel-titulo">{paso.titulo}</h3>
+      <p class="riel-desc">{paso.descripcion}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .riel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+
+  .riel::before {
+    content: '';
+    position: absolute;
+    left: 1.25rem;
+    top: 2.5rem;
+    bottom: 2.5rem;
+    width: 2px;
+    background: #FFCB08;
+  }
+
+  .riel-paso {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    position: relative;
+  }
+
+  .riel-nodo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #FFCB08;
+    color: #101F2C;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .riel-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #101F2C;
+    margin: 0.35rem 0 0.25rem;
+  }
+
+  .riel-desc {
+    font-size: 0.875rem;
+    color: #586A78;
+    margin: 0;
+    line-height: 1.5;
+  }
+</style>

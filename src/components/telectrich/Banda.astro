@@ -1,0 +1,33 @@
+---
+export interface Props {
+  variante?: 'noche' | 'blanco' | 'fondo' | 'canaleta';
+  clase?: string;
+}
+
+const { variante = 'blanco', clase = '' } = Astro.props;
+
+const clases = {
+  noche: 'bg-noche text-white',
+  blanco: 'bg-white text-noche',
+  fondo: 'bg-fondo text-noche',
+  canaleta: 'bg-noche canaleta text-white',
+};
+---
+
+<section class:list={['band', clases[variante], clase]}>
+  <div class="wrap">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .band {
+    padding: 4rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .band {
+      padding: 5rem 0;
+    }
+  }
+</style>

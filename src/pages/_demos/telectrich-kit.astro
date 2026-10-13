@@ -1,0 +1,237 @@
+---
+import TelectrichLayout from '~/layouts/TelectrichLayout.astro';
+import Banda from '~/components/telectrich/Banda.astro';
+import Boton from '~/components/telectrich/Boton.astro';
+import Etiqueta from '~/components/telectrich/Etiqueta.astro';
+import Hero from '~/components/telectrich/Hero.astro';
+import Unifilar from '~/components/telectrich/Unifilar.astro';
+import BandaFinal from '~/components/telectrich/BandaFinal.astro';
+import Faq from '~/components/telectrich/Faq.astro';
+import Riel from '~/components/telectrich/Riel.astro';
+import Badges from '~/components/telectrich/Badges.astro';
+import TarjetaSolucion from '~/components/telectrich/TarjetaSolucion.astro';
+import ListaAlcance from '~/components/telectrich/ListaAlcance.astro';
+import Marcas from '~/components/telectrich/Marcas.astro';
+import { SOLUCIONES } from '~/data/sitio';
+---
+
+<TelectrichLayout>
+  <div class="kit">
+    <header class="kit-header">
+      <div class="wrap">
+        <h1>Telectrich Component Kit</h1>
+        <p>Demo de componentes para trabajadores de F0</p>
+      </div>
+    </header>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Banda variants</h2>
+        <Banda variante="noche">
+          <p>Banda noche - texto blanco</p>
+        </Banda>
+        <Banda variante="blanco">
+          <p>Banda blanco - texto oscuro</p>
+        </Banda>
+        <Banda variante="fondo">
+          <p>Banda fondo - gris claro</p>
+        </Banda>
+        <Banda variante="canaleta">
+          <p>Banda canaleta - con textura</p>
+        </Banda>
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Botones</h2>
+        <div class="btn-demo">
+          <Boton href="/contacto/" variante="primario" texto="Primario" />
+          <Boton href="/contacto/" variante="secundario" texto="Secundario" />
+          <Boton href="https://wa.me/56935935595" variante="whatsapp" texto="WhatsApp" />
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Etiquetas</h2>
+        <div class="etiquetas-demo">
+          <Etiqueta texto="RIC N°2" />
+          <Etiqueta texto="IEC 61439" />
+          <Etiqueta texto="FAT" />
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Hero variants</h2>
+        <Hero
+          variante="home"
+          titulo="Fabricación de tableros eléctricos industriales"
+          bajada="Fuerza, control y precisión. Tableros eléctricos y sistemas de control que responden a las exigencias de tu proyecto."
+          palabraAcento="precisión"
+          foto="plc-s7-1200"
+          alt="Tablero industrial"
+        />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Unifilar</h2>
+        <div class="unifilar-demo">
+          <Unifilar lit={1} />
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Riel (Proceso)</h2>
+        <Riel pasos={[
+          { titulo: 'Diseño', descripcion: 'Alineado con la normativa y el estándar de cada cliente.' },
+          { titulo: 'Fabricación', descripcion: 'En nuestro taller de Buin.' },
+          { titulo: 'Pruebas de fábrica', descripcion: 'FAT antes del despacho.' },
+          { titulo: 'Comisionamiento', descripcion: 'En terreno, con el equipo instalado.' },
+          { titulo: 'Puesta en marcha', descripcion: 'Arranque coordinado y acompañamiento inicial.' },
+        ]} />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Badges (Normas)</h2>
+        <Badges normas={['RIC N°2', 'IEC 61439', 'FAT', 'IFAT', 'SAT', 'CAT']} />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Tarjetas de Solución</h2>
+        <div class="sol-grid">
+          {SOLUCIONES.map((solucion) => (
+            <TarjetaSolucion solucion={solucion} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Lista de Alcance</h2>
+        <ListaAlcance items={[
+          'Programación de PLC',
+          'Configuración de variadores',
+          'Diseño de arquitectura de red',
+          'Integración con sistemas SCADA',
+        ]} />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>Marcas</h2>
+        <Marcas />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <Faq items={[
+          {
+            pregunta: '¿Los tableros cumplen la normativa chilena?',
+            respuesta: 'Todos nuestros diseños están alineados con el Pliego Técnico RIC N°2 de la SEC y con la serie IEC 61439.',
+          },
+          {
+            pregunta: '¿Incluyen pruebas FAT?',
+            respuesta: 'Toda oferta incluye la prueba de aceptación en fábrica antes del despacho.',
+          },
+          {
+            pregunta: '¿Qué documentación entregan con el tablero?',
+            respuesta: 'Entregamos la documentación completa del proyecto: diseño, protocolo de pruebas FAT y memorias de cálculo.',
+          },
+        ]} />
+      </div>
+    </section>
+
+    <section class="kit-section">
+      <div class="wrap">
+        <BandaFinal
+          titulo="¿Tienes un proyecto de automatización o fuerza en marcha?"
+          palabraAcento="automatización"
+        />
+      </div>
+    </section>
+  </div>
+</TelectrichLayout>
+
+<style>
+  .kit {
+    padding-bottom: 6rem;
+  }
+
+  .kit-header {
+    background: #101F2C;
+    color: white;
+    padding: 4rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .kit-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .kit-header p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  .kit-section {
+    padding: 3rem 0;
+    border-bottom: 1px solid #E3E8EC;
+  }
+
+  .kit-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: #101F2C;
+  }
+
+  .btn-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .etiquetas-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .unifilar-demo {
+    position: relative;
+    height: 300px;
+    background: #101F2C;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .sol-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 767px) {
+    .sol-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

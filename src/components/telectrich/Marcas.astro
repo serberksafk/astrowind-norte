@@ -1,0 +1,52 @@
+---
+import { MARCAS } from '~/data/sitio';
+---
+
+<ul class="marcas" aria-label="Marcas que integramos">
+  {MARCAS.map((marca) => (
+    <li class="marca-item">
+      {marca.src ? (
+        <img src={marca.src} alt={marca.nombre} class="marca-logo" />
+      ) : (
+        <span class="marca-texto">{marca.nombre}</span>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .marcas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    .marcas {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .marca-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marca-logo {
+    height: 2rem;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+  }
+
+  .marca-texto {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #586A78;
+  }
+</style>

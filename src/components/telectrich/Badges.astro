@@ -1,0 +1,21 @@
+---
+export interface Props {
+  normas: string[];
+}
+
+const { normas } = Astro.props;
+---
+
+<div class="badges">
+  {normas.map((norma) => (
+    <span class="etiqueta">{norma}</span>
+  ))}
+</div>
+
+<style>
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>
