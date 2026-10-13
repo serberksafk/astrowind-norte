@@ -17,79 +17,123 @@ import { SOLUCIONES } from '~/data/sitio';
 
 <TelectrichLayout>
   <div class="kit">
+
     <header class="kit-header">
-      <div class="wrap">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <h1>Telectrich Component Kit</h1>
         <p>Demo de componentes para trabajadores de F0</p>
       </div>
     </header>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Banda variants</h2>
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Banda noche</h2>
         <Banda variante="noche">
-          <p>Banda noche - texto blanco</p>
-        </Banda>
-        <Banda variante="blanco">
-          <p>Banda blanco - texto oscuro</p>
-        </Banda>
-        <Banda variante="fondo">
-          <p>Banda fondo - gris claro</p>
-        </Banda>
-        <Banda variante="canaleta">
-          <p>Banda canaleta - con textura</p>
+          <p class="text-white">Banda noche - texto blanco</p>
         </Banda>
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Botones</h2>
-        <div class="btn-demo">
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Banda blanco</h2>
+        <Banda variante="blanco">
+          <p class="text-noche">Banda blanco - texto oscuro</p>
+        </Banda>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Banda fondo</h2>
+        <Banda variante="fondo">
+          <p class="text-noche">Banda fondo - gris claro</p>
+        </Banda>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Banda canaleta</h2>
+        <Banda variante="canaleta">
+          <p class="text-white">Banda canaleta - con textura</p>
+        </Banda>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-borde bg-fondo">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Botones sobre fondo claro</h2>
+        <div class="flex flex-wrap gap-4">
           <Boton href="/contacto/" variante="primario" texto="Primario" />
-          <Boton href="/contacto/" variante="secundario" texto="Secundario" />
+          <Boton href="/contacto/" variante="secundario-claro" texto="Secundario claro" />
           <Boton href="https://wa.me/56935935595" variante="whatsapp" texto="WhatsApp" />
         </div>
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Etiquetas</h2>
-        <div class="etiquetas-demo">
-          <Etiqueta texto="RIC N°2" />
-          <Etiqueta texto="IEC 61439" />
-          <Etiqueta texto="FAT" />
+    <section class="py-12 border-b border-borde bg-noche">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-white mb-6">Botones sobre fondo oscuro</h2>
+        <div class="flex flex-wrap gap-4">
+          <Boton href="/contacto/" variante="primario" texto="Primario" />
+          <Boton href="/contacto/" variante="secundario" texto="Secundario" />
         </div>
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Hero variants</h2>
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Etiquetas</h2>
+        <div class="flex flex-wrap gap-2">
+          <Etiqueta texto="RIC N°2" />
+          <Etiqueta texto="IEC 61439" />
+          <Etiqueta texto="FAT" />
+          <Etiqueta texto="IFAT" />
+          <Etiqueta texto="SAT" />
+          <Etiqueta texto="CAT" />
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Hero variant home (sobre noche + canaleta)</h2>
         <Hero
           variante="home"
           titulo="Fabricación de tableros eléctricos industriales"
           bajada="Fuerza, control y precisión. Tableros eléctricos y sistemas de control que responden a las exigencias de tu proyecto."
           palabraAcento="precisión"
           foto="plc-s7-1200"
-          alt="Tablero industrial"
+          alt="Interruptores y protecciones de un tablero de fuerza"
         />
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Unifilar</h2>
-        <div class="unifilar-demo">
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Hero variant corto</h2>
+        <Hero
+          variante="corto"
+          titulo="Tableros de fuerza"
+          bajada="Distribución y alimentación de cargas con protecciones"
+          palabraAcento="fuerza"
+        />
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Unifilar (dentro de noche)</h2>
+        <div class="relative h-64 bg-noche rounded-md overflow-hidden">
           <Unifilar lit={1} />
         </div>
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Riel (Proceso)</h2>
+    <section class="py-12 border-b border-borde bg-fondo">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Riel (Proceso) sobre fondo claro</h2>
         <Riel pasos={[
           { titulo: 'Diseño', descripcion: 'Alineado con la normativa y el estándar de cada cliente.' },
           { titulo: 'Fabricación', descripcion: 'En nuestro taller de Buin.' },
@@ -100,17 +144,17 @@ import { SOLUCIONES } from '~/data/sitio';
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Badges (Normas)</h2>
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Badges (Normas)</h2>
         <Badges normas={['RIC N°2', 'IEC 61439', 'FAT', 'IFAT', 'SAT', 'CAT']} />
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Tarjetas de Solución</h2>
-        <div class="sol-grid">
+    <section class="py-12 border-b border-borde bg-fondo">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Tarjetas de Solución</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SOLUCIONES.map((solucion) => (
             <TarjetaSolucion solucion={solucion} />
           ))}
@@ -118,28 +162,29 @@ import { SOLUCIONES } from '~/data/sitio';
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Lista de Alcance</h2>
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Lista de Alcance</h2>
         <ListaAlcance items={[
-          'Programación de PLC',
-          'Configuración de variadores',
-          'Diseño de arquitectura de red',
+          'Programación de PLC Siemens y ABB',
+          'Configuración de variadores de frecuencia',
+          'Diseño de arquitectura de red industrial',
           'Integración con sistemas SCADA',
         ]} />
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>Marcas</h2>
+    <section class="py-12 border-b border-borde bg-fondo">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">Marcas</h2>
         <Marcas />
+        <p class="text-sm text-cuerpo mt-4">8 logos SVG de marcas + Cisco y Emerson como texto (sin SVG disponible)</p>
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
-        <h2>FAQ</h2>
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-lg font-semibold text-noche mb-6">FAQ</h2>
         <Faq items={[
           {
             pregunta: '¿Los tableros cumplen la normativa chilena?',
@@ -157,14 +202,15 @@ import { SOLUCIONES } from '~/data/sitio';
       </div>
     </section>
 
-    <section class="kit-section">
-      <div class="wrap">
+    <section class="py-12 border-b border-borde">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <BandaFinal
           titulo="¿Tienes un proyecto de automatización o fuerza en marcha?"
           palabraAcento="automatización"
         />
       </div>
     </section>
+
   </div>
 </TelectrichLayout>
 
@@ -176,12 +222,12 @@ import { SOLUCIONES } from '~/data/sitio';
   .kit-header {
     background: #101F2C;
     color: white;
-    padding: 4rem 0;
-    margin-bottom: 2rem;
+    padding: 3rem 0;
+    margin-bottom: 0;
   }
 
   .kit-header h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
   }
@@ -189,49 +235,5 @@ import { SOLUCIONES } from '~/data/sitio';
   .kit-header p {
     color: rgba(255, 255, 255, 0.7);
     margin: 0;
-  }
-
-  .kit-section {
-    padding: 3rem 0;
-    border-bottom: 1px solid #E3E8EC;
-  }
-
-  .kit-section h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 1.5rem;
-    color: #101F2C;
-  }
-
-  .btn-demo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .etiquetas-demo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .unifilar-demo {
-    position: relative;
-    height: 300px;
-    background: #101F2C;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .sol-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  @media (max-width: 767px) {
-    .sol-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

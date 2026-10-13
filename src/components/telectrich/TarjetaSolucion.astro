@@ -1,20 +1,35 @@
 ---
 import type { Solucion } from '~/data/sitio';
+import { Image } from 'astro:assets';
+import distSchneider from '~/assets/img/distribucion-schneider.jpg';
+import controlAbb from '~/assets/img/control-abb-interior.jpg';
+import hmiNema from '~/assets/img/hmi-nema4x.jpg';
+import switchEmerson from '~/assets/img/switch-emerson.jpg';
 
 export interface Props {
   solucion: Solucion;
 }
 
 const { solucion } = Astro.props;
+
+const fotos: Record<string, ImageMetadata> = {
+  'distribucion-schneider': distSchneider,
+  'control-abb-interior': controlAbb,
+  'hmi-nema4x': hmiNema,
+  'switch-emerson': switchEmerson,
+};
+
+const imgSrc = fotos[solucion.foto] || distSchneider;
 ---
 
 <article class="tarjeta-solucion">
   <figure class="tarjeta-foto">
-    <img
-      src={`/img/${solucion.foto}.jpg`}
+    <Image
+      src={imgSrc}
       alt={solucion.alt}
-      width="1000"
-      height="750"
+      width={800}
+      height={600}
+      class="w-full h-auto object-cover rounded-md aspect-[4/3]"
       loading="lazy"
     />
   </figure>
@@ -47,26 +62,13 @@ const { solucion } = Astro.props;
     border-radius: 6px;
   }
 
-  .tarjeta-foto img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease-out;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .tarjeta-solucion:hover .tarjeta-foto img {
-      transform: scale(1.04);
-    }
-  }
-
   .tarjeta-body {
     padding: 1.25rem 0 0;
   }
 
   .numero-grande {
     font-family: var(--font-mono);
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 1;
     font-weight: 500;
     color: #FFCB08;
@@ -75,7 +77,7 @@ const { solucion } = Astro.props;
   }
 
   .tarjeta-titulo {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
     position: relative;

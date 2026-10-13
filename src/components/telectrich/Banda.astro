@@ -14,20 +14,8 @@ const clases = {
 };
 ---
 
-<section class:list={['band', clases[variante], clase]}>
-  <div class="wrap">
+<section class:list={['py-12 lg:py-16', clases[variante], clase]}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <slot />
   </div>
 </section>
-
-<style>
-  .band {
-    padding: 4rem 0;
-  }
-
-  @media (min-width: 768px) {
-    .band {
-      padding: 5rem 0;
-    }
-  }
-</style>

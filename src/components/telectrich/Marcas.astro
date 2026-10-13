@@ -1,17 +1,41 @@
 ---
 import { MARCAS } from '~/data/sitio';
+import MarcaSiemens from '~/assets/marcas/marca-siemens.svg';
+import MarcaAbb from '~/assets/marcas/marca-abb.svg';
+import MarcaSchneider from '~/assets/marcas/marca-schneider-electric.svg';
+import MarcaRockwell from '~/assets/marcas/marca-rockwell-automation.svg';
+import MarcaRittal from '~/assets/marcas/marca-rittal.svg';
+import MarcaEaton from '~/assets/marcas/marca-eaton.svg';
+import MarcaLegrand from '~/assets/marcas/marca-legrand.svg';
+import MarcaPhoenix from '~/assets/marcas/marca-phoenix-contact.svg';
+
+function getLogoSrc(nombre: string): string | undefined {
+  if (nombre === 'SIEMENS') return MarcaSiemens as unknown as string;
+  if (nombre === 'ABB') return MarcaAbb as unknown as string;
+  if (nombre === 'Schneider Electric') return MarcaSchneider as unknown as string;
+  if (nombre === 'Rockwell Automation') return MarcaRockwell as unknown as string;
+  if (nombre === 'Rittal') return MarcaRittal as unknown as string;
+  if (nombre === 'Eaton') return MarcaEaton as unknown as string;
+  if (nombre === 'Legrand') return MarcaLegrand as unknown as string;
+  if (nombre === 'Phoenix Contact') return MarcaPhoenix as unknown as string;
+  return undefined;
+}
 ---
 
 <ul class="marcas" aria-label="Marcas que integramos">
-  {MARCAS.map((marca) => (
-    <li class="marca-item">
-      {marca.src ? (
-        <img src={marca.src} alt={marca.nombre} class="marca-logo" />
-      ) : (
-        <span class="marca-texto">{marca.nombre}</span>
-      )}
-    </li>
-  ))}
+  {MARCAS.map((marca) => {
+    const logoSrc = getLogoSrc(marca.nombre);
+
+    return (
+      <li class="marca-item">
+        {logoSrc ? (
+          <img src={logoSrc} alt={marca.nombre} class="marca-logo" />
+        ) : (
+          <span class="marca-texto">{marca.nombre}</span>
+        )}
+      </li>
+    );
+  })}
 </ul>
 
 <style>
@@ -34,19 +58,22 @@ import { MARCAS } from '~/data/sitio';
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 3rem;
   }
 
   .marca-logo {
-    height: 2rem;
+    height: 100%;
     width: auto;
-    filter: grayscale(100%);
-    opacity: 0.6;
+    max-width: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.6);
   }
 
   .marca-texto {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: #586A78;
+    text-align: center;
   }
 </style>

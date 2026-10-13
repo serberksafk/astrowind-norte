@@ -1,7 +1,7 @@
 ---
 export interface Props {
   href: string;
-  variante?: 'primario' | 'secundario' | 'whatsapp';
+  variante?: 'primario' | 'secundario' | 'secundario-claro' | 'whatsapp';
   texto: string;
   clase?: string;
   ariaLabel?: string;
@@ -9,31 +9,21 @@ export interface Props {
 
 const { href, variante = 'primario', texto, clase = '', ariaLabel } = Astro.props;
 
-const esBoton = href.startsWith('#') || href.startsWith('/');
-
 const clases = {
-  primario: 'bg-acento text-noche hover:bg-acento/90',
-  secundario: 'bg-noche text-white hover:bg-noche/90',
-  whatsapp: 'border-2 border-white text-white hover:bg-white hover:text-noche',
+  primario: 'bg-acento text-noche hover:bg-acento/90 focus:ring-acento',
+  secundario: 'bg-noche text-white hover:bg-noche/90 border-2 border-noche focus:ring-noche',
+  'secundario-claro': 'bg-transparent text-noche border-2 border-noche hover:bg-noche hover:text-white focus:ring-noche',
+  whatsapp: 'bg-transparent text-white border-2 border-white hover:bg-white hover:text-noche',
 };
+
+const cls = clases[variante] || clases.primario;
 ---
 
-{esBoton ? (
-  <a
-    href={href}
-    class:list={['inline-flex items-center justify-center h-11 px-6 font-semibold text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-acento', clases[variante], clase]}
-    aria-label={ariaLabel}
-  >
-    <slot />
-    {texto}
-  </a>
-) : (
-  <a
-    href={href}
-    class:list={['inline-flex items-center justify-center h-11 px-6 font-semibold text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-acento', clases[variante], clase]}
-    aria-label={ariaLabel}
-  >
-    <slot />
-    {texto}
-  </a>
-)}
+<a
+  href={href}
+  class:list={['inline-flex items-center justify-center h-11 px-6 font-semibold text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2', cls, clase]}
+  aria-label={ariaLabel}
+>
+  <slot />
+  {texto}
+</a>
