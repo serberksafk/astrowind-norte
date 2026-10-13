@@ -32,3 +32,10 @@ Esta skill se suma a las de AstroWind y manda sobre ellas cuando chocan. Las ski
 2. Playwright CLI sobre `npm run preview`: ver la página a 375 y 1280 px, en claro y oscuro (si el oscuro sigue activo), sin errores en consola ni recursos remotos de fuentes.
 3. Lighthouse móvil: CWV ≥ 90 en cada plantilla de página nueva.
 4. Si hay redirecciones: comprobar cada 301 del mapa contra el build.
+
+## Estado de la base (fase 01)
+
+- Modo oscuro apagado (`ui.theme: 'light:only'`, sin toggle ni variables `.dark`). Las clases `dark:` de los componentes quedan inertes; no se usan en código nuevo.
+- Blog apagado (`apps.blog.isEnabled: false`). Barra de anuncio quitada. `trailingSlash: true`.
+- Rutas activas = las 10 de I1 (D-01 del plan) + `404` + `410`, hoy como estructura sin contenido. Menú y pie en `src/navigation.ts`.
+- Todo el resto de AstroWind está en `src/pages/_demos/` (Astro ignora carpetas con `_`): sirve de catálogo para copiar; no se publica.
