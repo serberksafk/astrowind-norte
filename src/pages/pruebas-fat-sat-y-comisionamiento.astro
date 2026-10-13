@@ -1,11 +1,613 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import TelectrichLayout from '~/layouts/TelectrichLayout.astro';
+import LineaFatSat from '~/components/telectrich/LineaFatSat.astro';
+import { CONTACTO } from '~/data/sitio';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Pruebas FAT, SAT y comisionamiento' };
+import tdc001Film from '~/assets/img/tdc-001-film.jpg';
+import interiorPlcAb from '~/assets/img/interior-plc-ab.jpg';
+import terrenoTableroAbierto from '~/assets/img/terreno-tablero-abierto.jpg';
+import terrenoGlandulas from '~/assets/img/terreno-glandulas.jpg';
+import terrenoCajaPlanta from '~/assets/img/terreno-caja-planta.jpg';
+
+const metadata = {
+  title: 'Pruebas FAT, SAT y comisionamiento de tableros eléctricos | Telectrich',
+  description:
+    'Pruebas FAT, SAT y comisionamiento de tableros eléctricos: validación en fábrica y acompañamiento en terreno hasta la puesta en marcha.',
+};
+
+const whatsappUrl = CONTACTO.whatsapp;
+
+const pasos = [
+  {
+    numero: '1',
+    tag: 'ETAPA 1 · FÁBRICA',
+    titulo: 'Pruebas en fábrica: FAT e IFAT',
+    descripcion:
+      'La FAT valida el funcionamiento del tablero en nuestro taller de Buin, antes del despacho. La IFAT es la prueba del sistema completo, no solo del gabinete ofertado, según el proyecto. Cualquier desviación detectada en fábrica se corrige antes de que el tablero llegue a planta.',
+    fotos: [
+      {
+        src: tdc001Film,
+        alt: 'Tablero embalado con film antes del despacho',
+        ancho: 720,
+        alto: 1280,
+      },
+      {
+        src: interiorPlcAb,
+        alt: 'Interior de un tablero con PLC',
+        ancho: 720,
+        alto: 1280,
+      },
+    ],
+  },
+  {
+    numero: '2',
+    tag: 'ETAPA 2 · TERRENO',
+    titulo: 'Pruebas en terreno: SAT y CAT',
+    descripcion:
+      'La SAT se ejecuta en la ubicación final del equipo cuando el proyecto lo requiere. Las pruebas en terreno se realizan donde el proyecto lo necesite. La CAT es la aceptación en terreno.',
+    fotos: [
+      {
+        src: terrenoTableroAbierto,
+        alt: 'Tablero abierto durante pruebas en terreno',
+        ancho: 1400,
+        alto: 1050,
+        posicion: '50% 20%',
+      },
+    ],
+    sticky: true,
+    kIndex: 0,
+  },
+  {
+    numero: '3',
+    tag: 'ETAPA 3',
+    titulo: 'Pre-comisionamiento',
+    descripcion:
+      'Verificación de montaje y pruebas en seco, antes de las pruebas con carga.',
+    fotos: [
+      {
+        src: terrenoGlandulas,
+        alt: 'Glándulas y entradas de cable de un tablero en terreno',
+        ancho: 1400,
+        alto: 1050,
+      },
+    ],
+    sticky: true,
+    kIndex: 1,
+  },
+  {
+    numero: '4',
+    tag: 'ETAPA 4',
+    titulo: 'Comisionamiento',
+    descripcion: 'Pruebas bajo carga, ajuste de señales y secuencias de control.',
+    sticky: true,
+    kIndex: 2,
+  },
+  {
+    numero: '5',
+    tag: 'ETAPA 5',
+    titulo: 'Puesta en marcha',
+    descripcion: 'Arranque coordinado, ajustes operativos y acompañamiento inicial.',
+    fotos: [
+      {
+        src: terrenoCajaPlanta,
+        alt: 'Equipos listos para puesta en marcha en planta',
+        ancho: 1200,
+        alto: 1600,
+        posicion: '50% 40%',
+      },
+    ],
+    sticky: true,
+    kIndex: 3,
+  },
+];
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Pruebas FAT, SAT y comisionamiento" />
-</Layout>
+<TelectrichLayout metadata={metadata}>
+  <section class="band band--canaleta pc-hero" aria-labelledby="hero-h1" data-cta-watch>
+    <div class="pc-hero-bg" aria-hidden="true">
+      <svg class="pc-unifilar" viewBox="0 0 1200 540" focusable="false">
+        <circle class="u-fill" pathLength="1" cx="100" cy="52" r="20" style="--dl:0s"></circle>
+        <path class="u-line" pathLength="1" d="M89 52q5.500-9 11 0t11 0" style="--dl:0.1s;--d:400ms"></path>
+        <path class="u-line" pathLength="1" d="M100 72V124" style="--dl:0.1s;--d:400ms"></path>
+        <rect class="u-fill" pathLength="1" x="86" y="124" width="28" height="40" rx="3" style="--dl:0.25s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M92 158 108 130" style="--dl:0.35s;--d:300ms"></path>
+        <path class="u-line" pathLength="1" d="M100 164V240" style="--dl:0.3s;--d:400ms"></path>
+        <text class="u-text" x="150" y="148" text-anchor="middle" style="--dl:0.5s">Q1</text>
+        <path class="u-line u-bus" pathLength="1" d="M100 240H1100" style="--dl:0.6s;--d:800ms"></path>
+        <path class="u-line" pathLength="1" d="M230 240V500" style="--dl:0.9s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M500 240V500" style="--dl:1.02s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M770 240V500" style="--dl:1.1400000000000001s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M1040 240V500" style="--dl:1.26s;--d:600ms"></path>
+        <rect class="u-fill" pathLength="1" x="216" y="292" width="28" height="46" rx="3" style="--dl:1s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M222 332 238 298" style="--dl:1.1s;--d:300ms"></path>
+        <circle class="u-fill" pathLength="1" cx="230" cy="430" r="26" style="--dl:1.15s"></circle>
+        <text class="u-text" x="230" y="436" text-anchor="middle" style="--dl:1.2s">M</text>
+        <rect class="u-fill" pathLength="1" x="444" y="296" width="112" height="80" rx="3" style="--dl:1.1s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="458" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="490" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="522" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M458 352H542" style="--dl:1.25s;--d:300ms"></path>
+        <rect class="u-fill" pathLength="1" x="708" y="296" width="124" height="84" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="720" y="306" width="100" height="56" rx="3" style="--dl:1.3s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M750 392H790" style="--dl:1.35s;--d:300ms"></path>
+        <rect class="u-fill" pathLength="1" x="974" y="300" width="132" height="46" rx="3" style="--dl:1.3s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="990" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1018" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1046" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1074" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M1000 346V440M1040 346V460M1080 346V440" style="--dl:1.4s;--d:400ms"></path>
+        <text class="u-text" x="230" y="530" text-anchor="middle" style="--dl:1.5s">01 FUERZA</text>
+        <text class="u-text" x="500" y="530" text-anchor="middle" style="--dl:1.55s">02 CONTROL</text>
+        <text class="u-text" x="770" y="530" text-anchor="middle" style="--dl:1.6s">03 SUPERVISIÓN</text>
+        <text class="u-text" x="1040" y="530" text-anchor="middle" style="--dl:1.65s">04 COMUNICACIONES</text>
+      </svg>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-hero-grid">
+        <div class="pc-hero-copy">
+          <nav class="pc-crumb" aria-label="Miga de pan">
+            <a href="/">Inicio</a>
+            <span aria-hidden="true" class="pc-crumb-sep">/</span>
+            <span aria-current="page">Servicios de terreno</span>
+          </nav>
+          <h1 class="pc-h1" id="hero-h1">
+            Pruebas FAT, SAT y comisionamiento de tableros <mark class="acento">eléctricos</mark>
+          </h1>
+          <p class="pc-lead">
+            Las pruebas son parte de cada oferta de Telectrich. Validamos el tablero en fábrica y lo acompañamos
+            en terreno hasta la puesta en marcha.
+          </p>
+          <div class="pc-cta-row">
+            <a href="/contacto/" class="pc-btn-primary">Conversemos</a>
+            <a href={whatsappUrl} class="pc-btn-outline" data-wa="hero">
+              <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                ></path>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--blanco" aria-labelledby="cic">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-split">
+        <div class="pc-prose">
+          <h2 class="pc-h2" id="cic">El ciclo de pruebas de Telectrich</h2>
+          <div class="pc-chips">
+            <span class="etiqueta">FAT</span>
+            <span aria-hidden="true" class="pc-chip-arr">→</span>
+            <span class="etiqueta">IFAT</span>
+            <span aria-hidden="true" class="pc-chip-arr">→</span>
+            <span class="etiqueta">SAT</span>
+            <span aria-hidden="true" class="pc-chip-arr">→</span>
+            <span class="etiqueta">CAT</span>
+          </div>
+          <p class="pc-prose-p">
+            Las pruebas acompañan a las cuatro soluciones:
+            <a href="/soluciones/tableros-de-fuerza/" class="pc-inline-link">tableros de fuerza y control</a>,
+            <a href="/soluciones/tableros-de-control/" class="pc-inline-link">tableros eléctricos de control</a>,
+            <a href="/soluciones/comunicacion-industrial/" class="pc-inline-link">redes de comunicación industrial</a>
+            y
+            <a href="/soluciones/supervision-hmi/" class="pc-inline-link">HMI</a>. Toda oferta incluye FAT. El ciclo
+            continúa con IFAT según el proyecto, SAT cuando el proyecto lo requiere y CAT, seguido de las tres etapas
+            de puesta en marcha. Sus resultados son la evidencia de que el tablero cumple el diseño, en línea con
+            RIC N°2 e IEC 61439.
+          </p>
+          <div class="pc-tbl-wrap">
+            <table class="pc-tbl">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">FAT</th>
+                  <th scope="col">SAT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Dónde</th>
+                  <td>Taller de Telectrich</td>
+                  <td>Instalación final</td>
+                </tr>
+                <tr>
+                  <th scope="row">Cuándo</th>
+                  <td>Antes del despacho</td>
+                  <td>Tras el montaje</td>
+                </tr>
+                <tr>
+                  <th scope="row">Qué valida</th>
+                  <td>Funcionamiento del tablero según diseño</td>
+                  <td>Funcionamiento en su entorno real</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--noche pc-line-section" aria-labelledby="lin">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-sec-head">
+        <h2 class="pc-h2 pc-h2--noche" id="lin">
+          De la fábrica a la <mark class="acento">puesta en marcha</mark>
+        </h2>
+        <p class="pc-lead">Cada etapa deja evidencia antes de pasar a la siguiente.</p>
+      </div>
+      <LineaFatSat pasos={pasos}>
+        <div slot="fin">
+          <h2 class="pc-h3 pc-h3--noche">Por qué importa el protocolo</h2>
+          <p class="pc-prose-p pc-prose-p--noche">
+            Un protocolo de pruebas protege la continuidad operacional y reduce los sobrecostos por fallas en el
+            arranque. Además deja claro, desde la cotización, qué pruebas están incluidas. Indícanos qué pruebas
+            necesita tu proyecto y las dejamos definidas en la cotización.
+          </p>
+          <div class="pc-cta-row" data-cta-watch>
+            <a href="/contacto/" class="pc-btn-primary pc-btn-ring">Conversemos</a>
+            <a href={whatsappUrl} class="pc-btn-outline" data-wa="cta-final">
+              <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                ></path>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </LineaFatSat>
+    </div>
+  </section>
+</TelectrichLayout>
+
+<style is:global>
+  /* ---- Hero ---- */
+  .pc-hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pc-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .pc-unifilar {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    opacity: 0.16;
+  }
+
+  .pc-unifilar .u-fill,
+  .pc-unifilar .u-line,
+  .pc-unifilar .u-text {
+    stroke: #ffcb08;
+    fill: #ffcb08;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .pc-unifilar .u-bus {
+    stroke-width: 2;
+  }
+
+  .pc-unifilar .u-text {
+    stroke: none;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pc-unifilar .u-line,
+    .pc-unifilar .u-fill,
+    .pc-unifilar .u-text {
+      animation-duration: var(--d, 600ms);
+      animation-delay: var(--dl, 0s);
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .pc-unifilar .u-line {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation-name: pc-unifilar-draw;
+    }
+    .pc-unifilar .u-fill {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation-name: pc-unifilar-pop;
+    }
+    .pc-unifilar .u-text {
+      animation-name: pc-unifilar-fade;
+    }
+
+    @keyframes pc-unifilar-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes pc-unifilar-pop {
+      from {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes pc-unifilar-fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .pc-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .pc-hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pc-hero-copy {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 70ch;
+  }
+
+  .pc-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+  }
+  .pc-crumb a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+  .pc-crumb a:hover {
+    color: #ffcb08;
+  }
+  .pc-crumb-sep {
+    color: rgba(255, 255, 255, 0.35);
+  }
+  .pc-crumb [aria-current='page'] {
+    color: #ffcb08;
+  }
+
+  .pc-h1 {
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4rem);
+    margin: 0;
+  }
+
+  .pc-lead {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+    line-height: 1.55;
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .pc-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .pc-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    background-color: #ffcb08;
+    color: #101f2c;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .pc-btn-primary:hover {
+    background-color: rgba(255, 203, 8, 0.9);
+  }
+  .pc-btn-ring {
+    box-shadow: 0 0 0 6px rgba(255, 203, 8, 0);
+    transition: box-shadow 0.6s ease-out;
+  }
+  .pc-btn-ring.go {
+    box-shadow: 0 0 0 6px rgba(255, 203, 8, 0.35);
+  }
+
+  .pc-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .pc-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  /* ---- Sección "El ciclo" ---- */
+  .pc-split {
+    display: grid;
+    gap: 2rem;
+  }
+  .pc-prose {
+    max-width: 62ch;
+  }
+  .pc-prose-p {
+    color: var(--color-cuerpo);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+  }
+  .pc-prose-p--noche {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .pc-h2 {
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    color: var(--color-noche);
+    margin: 0;
+  }
+  .pc-h2--noche {
+    color: #ffffff;
+  }
+  .pc-h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-noche);
+    margin: 0;
+    letter-spacing: -0.018em;
+  }
+  .pc-h3--noche {
+    color: #ffffff;
+  }
+
+  .pc-chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.75rem 0;
+  }
+  .pc-chip-arr {
+    color: var(--color-cuerpo);
+    font-size: 1.125rem;
+    font-family: var(--font-mono);
+    line-height: 1;
+  }
+
+  .pc-inline-link {
+    color: var(--color-noche);
+    text-decoration: underline;
+    text-decoration-color: var(--color-borde);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.18s ease;
+  }
+  .pc-inline-link:hover {
+    text-decoration-color: var(--color-acento);
+  }
+
+  .pc-tbl-wrap {
+    margin-top: 2rem;
+    overflow-x: auto;
+  }
+  .pc-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    color: var(--color-noche);
+  }
+  .pc-tbl th,
+  .pc-tbl td {
+    text-align: left;
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--color-borde);
+    vertical-align: top;
+  }
+  .pc-tbl thead th {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-cuerpo);
+    background: var(--color-fondo);
+  }
+  .pc-tbl tbody th {
+    font-weight: 500;
+    color: var(--color-noche);
+    width: 30%;
+    background: transparent;
+  }
+  .pc-tbl tbody td {
+    color: var(--color-cuerpo);
+  }
+
+  /* ---- Sección línea ---- */
+  .pc-sec-head {
+    margin-bottom: 2.5rem;
+    max-width: 60ch;
+  }
+  .pc-sec-head .pc-lead {
+    margin-top: 1rem;
+  }
+  .pc-line-section {
+    padding-bottom: clamp(64px, 9vw, 128px);
+  }
+</style>
+
+<script>
+  // Anillo del botón Conversemos cuando la línea termina.
+  function initPcRing() {
+    const ring = document.querySelector<HTMLElement>('.pc-btn-ring');
+    const linea = document.querySelector<HTMLElement>('[data-linea]');
+    if (!ring || !linea) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            ring.classList.add('go');
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.95 },
+    );
+    observer.observe(linea);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPcRing, { once: true });
+  } else {
+    initPcRing();
+  }
+  document.addEventListener('astro:page-load', initPcRing);
+</script>

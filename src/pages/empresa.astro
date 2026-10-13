@@ -1,11 +1,764 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import TelectrichLayout from '~/layouts/TelectrichLayout.astro';
+import BandaFinal from '~/components/telectrich/BandaFinal.astro';
+import { CONTACTO } from '~/data/sitio';
+import { Image } from 'astro:assets';
+import fuerzaEstructuraTaller from '~/assets/img/fuerza-estructura-taller.jpg';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Empresa' };
+const metadata = {
+  title: 'Telectrich, división de AT Ingeniería | Empresa',
+  description:
+    'Telectrich es la división de AT Ingeniería SpA que diseña, fabrica y pone en marcha tableros eléctricos y sistemas de control para la industria.',
+};
+
+const whatsappUrl = CONTACTO.whatsapp;
+
+const pasosComo = [
+  {
+    titulo: 'Diseño',
+    descripcion: 'Alineado con RIC N°2 e IEC 61439.',
+  },
+  {
+    titulo: 'Fabricación',
+    descripcion: 'En nuestro taller de Buin.',
+  },
+  {
+    titulo: 'Pruebas de fábrica',
+    descripcion: 'Antes del despacho.',
+  },
+  {
+    titulo: 'Comisionamiento',
+    descripcion: 'En terreno.',
+  },
+  {
+    titulo: 'Puesta en marcha',
+    descripcion: 'Arranque coordinado y acompañamiento inicial.',
+  },
+];
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Empresa" />
-</Layout>
+<TelectrichLayout metadata={metadata}>
+  <section class="band band--canaleta pc-hero" aria-labelledby="hero-h1" data-cta-watch>
+    <div class="pc-hero-bg" aria-hidden="true">
+      <svg class="pc-unifilar" viewBox="0 0 1200 540" focusable="false">
+        <circle class="u-fill" pathLength="1" cx="100" cy="52" r="20" style="--dl:0s"></circle>
+        <path class="u-line" pathLength="1" d="M89 52q5.500-9 11 0t11 0" style="--dl:0.1s;--d:400ms"></path>
+        <path class="u-line" pathLength="1" d="M100 72V124" style="--dl:0.1s;--d:400ms"></path>
+        <rect class="u-fill" pathLength="1" x="86" y="124" width="28" height="40" rx="3" style="--dl:0.25s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M92 158 108 130" style="--dl:0.35s;--d:300ms"></path>
+        <path class="u-line" pathLength="1" d="M100 164V240" style="--dl:0.3s;--d:400ms"></path>
+        <text class="u-text" x="150" y="148" text-anchor="middle" style="--dl:0.5s">Q1</text>
+        <path class="u-line u-bus" pathLength="1" d="M100 240H1100" style="--dl:0.6s;--d:800ms"></path>
+        <path class="u-line" pathLength="1" d="M230 240V500" style="--dl:0.9s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M500 240V500" style="--dl:1.02s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M770 240V500" style="--dl:1.1400000000000001s;--d:600ms"></path>
+        <path class="u-line" pathLength="1" d="M1040 240V500" style="--dl:1.26s;--d:600ms"></path>
+        <rect class="u-fill" pathLength="1" x="216" y="292" width="28" height="46" rx="3" style="--dl:1s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M222 332 238 298" style="--dl:1.1s;--d:300ms"></path>
+        <circle class="u-fill" pathLength="1" cx="230" cy="430" r="26" style="--dl:1.15s"></circle>
+        <text class="u-text" x="230" y="436" text-anchor="middle" style="--dl:1.2s">M</text>
+        <rect class="u-fill" pathLength="1" x="444" y="296" width="112" height="80" rx="3" style="--dl:1.1s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="458" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="490" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="522" y="312" width="24" height="16" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M458 352H542" style="--dl:1.25s;--d:300ms"></path>
+        <rect class="u-fill" pathLength="1" x="708" y="296" width="124" height="84" rx="3" style="--dl:1.2s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="720" y="306" width="100" height="56" rx="3" style="--dl:1.3s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M750 392H790" style="--dl:1.35s;--d:300ms"></path>
+        <rect class="u-fill" pathLength="1" x="974" y="300" width="132" height="46" rx="3" style="--dl:1.3s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="990" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1018" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1046" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <rect class="u-fill" pathLength="1" x="1074" y="314" width="18" height="18" rx="3" style="--dl:1.4s;--d:600ms"></rect>
+        <path class="u-line" pathLength="1" d="M1000 346V440M1040 346V460M1080 346V440" style="--dl:1.4s;--d:400ms"></path>
+        <text class="u-text" x="230" y="530" text-anchor="middle" style="--dl:1.5s">01 FUERZA</text>
+        <text class="u-text" x="500" y="530" text-anchor="middle" style="--dl:1.55s">02 CONTROL</text>
+        <text class="u-text" x="770" y="530" text-anchor="middle" style="--dl:1.6s">03 SUPERVISIÓN</text>
+        <text class="u-text" x="1040" y="530" text-anchor="middle" style="--dl:1.65s">04 COMUNICACIONES</text>
+      </svg>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-hero-grid">
+        <div class="pc-hero-copy">
+          <nav class="pc-crumb" aria-label="Miga de pan">
+            <a href="/">Inicio</a>
+            <span aria-hidden="true" class="pc-crumb-sep">/</span>
+            <span aria-current="page">Empresa</span>
+          </nav>
+          <h1 class="pc-h1" id="hero-h1">
+            Ingeniería eléctrica con el respaldo de <mark class="acento">AT Ingeniería</mark>
+          </h1>
+          <p class="pc-lead">
+            Telectrich es la división de AT Ingeniería SpA que diseña, fabrica y pone en marcha tableros eléctricos
+            y sistemas de control para la industria. Detrás hay trayectoria B2B desde 2013 y un taller en Buin.
+          </p>
+          <div class="pc-cta-row">
+            <a href="/contacto/" class="pc-btn-primary">Hablar con Telectrich</a>
+            <a href={whatsappUrl} class="pc-btn-outline" data-wa="hero">
+              <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                ></path>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--blanco" aria-labelledby="div">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-div-grid">
+        <div class="pc-prose pc-div-prose">
+          <h2 class="pc-h2" id="div">Una división especializada de AT Ingeniería SpA</h2>
+          <p class="pc-prose-p">
+            AT Ingeniería SpA fue fundada en 2013 y trabaja en proyectos para clientes de alta exigencia. Telectrich
+            concentra esa experiencia en un frente concreto: tableros eléctricos de fuerza, control, comunicación y
+            supervisión para operaciones industriales. Trabajamos con jefes de proyecto y equipos de compras que
+            necesitan un proveedor con respaldo y alcance definido.
+          </p>
+        </div>
+        <div class="pc-div-year">
+          <div class="pc-big-year">
+            <small>desde</small>
+            <span class="pc-big-year-num">2013</span>
+            <i aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--fondo" aria-labelledby="qh">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-sec-head">
+        <h2 class="pc-h2" id="qh">Qué hacemos</h2>
+      </div>
+      <div class="pc-panels">
+        <div class="pc-panel">
+          <span class="etiqueta">01 · FUERZA</span>
+          <p>Distribución y alimentación de cargas, protecciones y dispositivos de maniobra.</p>
+        </div>
+        <div class="pc-panel">
+          <span class="etiqueta">02 · CONTROL</span>
+          <p>Integración de PLC, módulos I/O y gestión de señales.</p>
+        </div>
+        <div class="pc-panel">
+          <span class="etiqueta">03 · SUPERVISIÓN</span>
+          <p>Interfaces HMI, visualización de estados, alarmas y comandos.</p>
+        </div>
+        <div class="pc-panel">
+          <span class="etiqueta">04 · COMUNICACIÓN</span>
+          <p>Switches, Ethernet y fibra óptica entre campo, control y supervisión.</p>
+        </div>
+      </div>
+      <p class="pc-link-row">
+        Sumamos pruebas y puesta en marcha en terreno.
+        <a class="pc-link-arrow" href="/soluciones/">
+          Ver soluciones eléctricas industriales
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"></path>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="band band--blanco" aria-labelledby="ct">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-sec-head">
+        <h2 class="pc-h2" id="ct">Cómo trabajamos</h2>
+        <p class="pc-lead pc-lead--claro">Cada proyecto sigue la misma secuencia.</p>
+      </div>
+      <ol class="pc-rail">
+        {
+            pasosComo.map((paso, i) => (
+              <li class="pc-rail-paso">
+                <span class="pc-rail-nodo" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div class="pc-rail-content">
+                  <h3 class="pc-rail-titulo">{paso.titulo}</h3>
+                  <p class="pc-rail-desc">{paso.descripcion}</p>
+                </div>
+              </li>
+            ))
+          }
+      </ol>
+      <p class="pc-link-row">
+        <a class="pc-link-arrow" href="/pruebas-fat-sat-y-comisionamiento/">
+          Conoce cómo desarrollamos las pruebas en nuestra fábrica
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"></path>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="band band--fondo" aria-labelledby="dd">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pc-feat">
+        <div class="pc-feat-a">
+          <h2 class="pc-h2" id="dd">Dónde estamos</h2>
+          <p class="pc-prose-p">
+            Nuestro taller está en Parcelación Victoria de Viluco, Buin, Región Metropolitana. Fabricamos y
+            atendemos de lunes a viernes, de 09:00 a 18:00 h.
+          </p>
+          <dl class="pc-dl">
+            <div>
+              <dt>Trayectoria</dt>
+              <dd>AT Ingeniería, desde 2013</dd>
+            </div>
+            <div>
+              <dt>Normativa</dt>
+              <dd>Diseño alineado con RIC N°2 e IEC 61439</dd>
+            </div>
+            <div>
+              <dt>Componentes</dt>
+              <dd>Integración multimarca</dd>
+            </div>
+            <div>
+              <dt>Taller</dt>
+              <dd>Buin, Región Metropolitana</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="pc-feat-b">
+          <figure class="pc-px">
+            <Image
+              src={fuerzaEstructuraTaller}
+              alt="Estructura de un tablero en fabricación en el taller"
+              width={1013}
+              height={954}
+              loading="lazy"
+              class="pc-px-img"
+            />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <BandaFinal
+    titulo="Si tu proyecto necesita un proveedor con experiencia y respaldo, conversemos."
+    palabraAcento="conversemos"
+    botonTexto="Hablar con Telectrich"
+  />
+</TelectrichLayout>
+
+<style is:global>
+  /* ---- Hero ---- */
+  .pc-hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pc-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .pc-unifilar {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    opacity: 0.16;
+  }
+
+  .pc-unifilar .u-fill,
+  .pc-unifilar .u-line,
+  .pc-unifilar .u-text {
+    stroke: #ffcb08;
+    fill: #ffcb08;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .pc-unifilar .u-bus {
+    stroke-width: 2;
+  }
+
+  .pc-unifilar .u-text {
+    stroke: none;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pc-unifilar .u-line,
+    .pc-unifilar .u-fill,
+    .pc-unifilar .u-text {
+      animation-duration: var(--d, 600ms);
+      animation-delay: var(--dl, 0s);
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .pc-unifilar .u-line {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation-name: pc-unifilar-draw;
+    }
+    .pc-unifilar .u-fill {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation-name: pc-unifilar-pop;
+    }
+    .pc-unifilar .u-text {
+      animation-name: pc-unifilar-fade;
+    }
+
+    @keyframes pc-unifilar-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes pc-unifilar-pop {
+      from {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    @keyframes pc-unifilar-fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .pc-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .pc-hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pc-hero-copy {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 70ch;
+  }
+
+  .pc-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+  }
+  .pc-crumb a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+  .pc-crumb a:hover {
+    color: #ffcb08;
+  }
+  .pc-crumb-sep {
+    color: rgba(255, 255, 255, 0.35);
+  }
+  .pc-crumb [aria-current='page'] {
+    color: #ffcb08;
+  }
+
+  .pc-h1 {
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4rem);
+    margin: 0;
+  }
+
+  .pc-lead {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+    line-height: 1.55;
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .pc-lead--claro {
+    color: var(--color-cuerpo);
+  }
+
+  .pc-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .pc-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    background-color: #ffcb08;
+    color: #101f2c;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .pc-btn-primary:hover {
+    background-color: rgba(255, 203, 8, 0.9);
+  }
+
+  .pc-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .pc-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  /* ---- División de AT Ingeniería ---- */
+  .pc-div-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .pc-div-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .pc-div-prose {
+    max-width: 62ch;
+  }
+
+  .pc-prose {
+    max-width: 62ch;
+  }
+  .pc-prose-p {
+    color: var(--color-cuerpo);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+  }
+
+  .pc-h2 {
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    color: var(--color-noche);
+    margin: 0;
+  }
+
+  .pc-big-year {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    color: var(--color-noche);
+  }
+
+  .pc-big-year small {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-cuerpo);
+    text-transform: lowercase;
+    font-weight: 500;
+  }
+
+  .pc-big-year-num {
+    font-size: clamp(4rem, 1rem + 8vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-noche);
+  }
+
+  .pc-big-year i {
+    display: block;
+    width: 56px;
+    height: 4px;
+    margin-top: 0.75rem;
+    background-color: #ffcb08;
+  }
+
+  /* ---- Qué hacemos ---- */
+  .pc-sec-head {
+    margin-bottom: 2.5rem;
+    max-width: 60ch;
+  }
+
+  .pc-panels {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .pc-panels {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pc-panels {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pc-panel {
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+  }
+
+  .pc-panel .etiqueta {
+    margin-bottom: 0.75rem;
+  }
+
+  .pc-panel p {
+    color: var(--color-cuerpo);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0.75rem 0 0;
+  }
+
+  .pc-link-row {
+    margin-top: 2rem;
+    color: var(--color-cuerpo);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .pc-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--color-noche);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-acento);
+    padding-bottom: 0.125rem;
+    margin-left: 0.375rem;
+    transition: color 0.15s ease;
+  }
+  .pc-link-arrow svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+  .pc-link-arrow:hover {
+    color: var(--color-noche-2);
+  }
+
+  /* ---- Cómo trabajamos (riel estático) ---- */
+  .pc-rail {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pc-rail::before {
+    content: '';
+    position: absolute;
+    left: 1.25rem;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 2px;
+    background: var(--color-acento);
+  }
+
+  .pc-rail-paso {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    position: relative;
+  }
+
+  .pc-rail-nodo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--color-acento);
+    color: var(--color-noche);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  .pc-rail-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pc-rail-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-noche);
+    margin: 0.2rem 0 0.25rem;
+  }
+
+  .pc-rail-desc {
+    font-size: 0.875rem;
+    color: var(--color-cuerpo);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ---- Dónde estamos (feat + parallax) ---- */
+  .pc-feat {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .pc-feat {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 4rem;
+    }
+  }
+
+  .pc-feat-a {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .pc-feat-b {
+    display: flex;
+  }
+
+  .pc-dl {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem 1.5rem;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-borde);
+  }
+
+  @media (min-width: 768px) {
+    .pc-dl {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pc-dl > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .pc-dl dt {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-cuerpo);
+    font-weight: 500;
+  }
+
+  .pc-dl dd {
+    color: var(--color-noche);
+    font-size: 0.9375rem;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .pc-px {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    aspect-ratio: 4 / 3;
+    background: var(--color-noche);
+    width: 100%;
+  }
+
+  .pc-px-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      /* La timeline va en un selector aparte: lightningcss la fusiona dentro
+         del shorthand `animation` (que no la admite) y el navegador lo descarta. */
+      .pc-px .pc-px-img {
+        animation: pc-parallax linear both;
+      }
+      .pc-px > .pc-px-img {
+        animation-timeline: view();
+        animation-range: cover;
+        will-change: transform;
+      }
+      @keyframes pc-parallax {
+        from {
+          transform: translateY(-16px) scale(1.08);
+        }
+        to {
+          transform: translateY(16px) scale(1.08);
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pc-px-img {
+      transform: none !important;
+    }
+  }
+</style>
