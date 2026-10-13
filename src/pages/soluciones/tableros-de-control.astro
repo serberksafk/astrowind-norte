@@ -1,11 +1,148 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import PaginaSolucion from '~/components/telectrich/PaginaSolucion.astro';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Tableros de control' };
+const metadata = {
+  title: 'Tableros eléctricos de control y automatización con PLC | Telectrich',
+  description:
+    'Tableros eléctricos de control y automatización con PLC, módulos I/O y programación. Pruebas FAT antes del despacho.',
+};
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Tableros de control" />
-</Layout>
+<PaginaSolucion
+  metadata={metadata}
+  migas={[
+    { texto: 'Inicio', href: '/' },
+    { texto: 'Soluciones', href: '/soluciones/' },
+    { texto: 'Tableros de control' },
+  ]}
+  ramalIluminado={2}
+  heroFoto="control-s7-300"
+  heroAlt="Filas de módulos de un sistema de control PLC"
+  heroObjectPosition="50% 45%"
+  heroAncho={960}
+  heroAlto={1280}
+  titulo="Tableros eléctricos de control y automatización con PLC"
+  palabraAcento="PLC"
+  lead="Sistemas de control diseñados para gestionar señales, coordinar procesos y asegurar la escalabilidad de tu operación."
+  ctaPrimario="Cotizar tablero de control"
+  secciones={[
+    {
+      tipo: 'definicion',
+      titulo: '¿Qué es un tablero eléctrico de control?',
+      contenido:
+        'Un tablero eléctrico de control es el cerebro de la automatización. Integra equipos de control y lógica programable para gestionar señales de campo y coordinar el funcionamiento de los sistemas de la planta, transformando requerimientos operativos en acciones precisas de maquinaria y potencia.',
+    },
+    {
+      tipo: 'metodologia',
+      titulo: 'Cómo dimensionamos tu sistema',
+      intro: 'Seguimos un proceso de ingeniería para que el control sea robusto y mantenible.',
+      pasos: [
+        {
+          titulo: 'Evaluación técnica',
+          desc: 'Analizamos el proceso industrial para entender la dinámica de operación.',
+        },
+        {
+          titulo: 'Mapeo de señales',
+          desc: 'Definimos las señales a gestionar (entradas y salidas analógicas y digitales).',
+        },
+        {
+          titulo: 'Requerimientos de control',
+          desc: 'Establecemos la lógica de operación y las prioridades de seguridad.',
+        },
+        {
+          titulo: 'Infraestructura de comunicaciones',
+          desc: 'Determinamos los protocolos y la topología de red necesaria.',
+        },
+        {
+          titulo: 'Condiciones de montaje',
+          desc: 'Evaluamos el entorno físico para seleccionar el envolvente adecuado.',
+        },
+      ],
+      resultado: 'dimensionamiento preciso de módulos, fuentes de poder y protecciones eléctricas.',
+    },
+    {
+      tipo: 'alcance-control',
+      titulo: 'Tableros de automatización industrial a medida',
+      items: [
+        {
+          tag: 'PLC',
+          titulo: 'PLC y módulos I/O',
+          desc: 'Controladores lógicos programables y módulos de entrada y salida.',
+        },
+        {
+          tag: 'PRG',
+          titulo: 'Programación de la lógica de control',
+          desc: 'Desarrollamos la lógica de control junto con el diseño eléctrico y el montaje.',
+        },
+        {
+          tag: 'VDF',
+          titulo: 'Variadores y partidores suaves',
+          desc: 'Los integramos según los requerimientos del proyecto.',
+        },
+        {
+          tag: 'COM',
+          titulo: 'Integración de señales y comunicaciones',
+          desc: 'Gestión de señales industriales y protocolos de comunicación para un flujo de datos sin interrupciones.',
+        },
+        {
+          tag: 'ID',
+          titulo: 'Componentes para mantenimiento',
+          desc: 'Identificación profesional de cada componente y conexión, que facilita el diagnóstico rápido y la intervención técnica.',
+        },
+      ],
+      foto: { src: 'plc-abb-pm564', alt: 'Primer plano de un PLC con módulos de comunicación' },
+    },
+    {
+      tipo: 'marcas-diseno',
+      titulo: 'Marcas y diseño para el futuro',
+      palabraAcento: 'futuro',
+      intro:
+        'Marcas que integramos: PLC y componentes de Siemens, Rockwell Automation (Allen-Bradley) y Schneider Electric.',
+      bullets: [
+        'Marcas que integramos: PLC y componentes de Siemens, Rockwell Automation (Allen-Bradley) y Schneider Electric.',
+        'Diseño para el futuro: organizamos el interior del tablero para permitir la adaptación y el crecimiento del sistema sin rediseñar toda la infraestructura.',
+      ],
+      foto: { src: 'cableado-terminales', alt: 'Cableado y borneras de un tablero de control' },
+    },
+    {
+      tipo: 'pruebas-fondo',
+      titulo: 'Validación técnica',
+      contenido:
+        'Cada tablero de control pasa por un ciclo de validación que incluye pruebas de lógica, señales y funcionalidad antes del despacho. Este proceso se complementa con el comisionamiento en terreno.',
+      enlace: { texto: 'Conoce nuestras pruebas en fábrica y en terreno', href: '/pruebas-fat-sat-y-comisionamiento/' },
+    },
+    {
+      tipo: 'faq',
+      titulo: 'Preguntas frecuentes',
+      variante: 'blanco',
+      items: [
+        {
+          pregunta: '¿Qué marcas de PLC integran?',
+          respuesta:
+            'Integramos PLC de Siemens, Rockwell Automation y Schneider Electric, y elegimos la plataforma según los requerimientos del proyecto.',
+        },
+        {
+          pregunta: '¿El tablero de control incluye la programación?',
+          respuesta:
+            'Sí, nuestro servicio abarca desde el diseño eléctrico y el montaje hasta la programación de la lógica de control.',
+        },
+        {
+          pregunta: '¿Pueden modernizar un tablero de control existente?',
+          respuesta:
+            'Sí, realizamos proyectos de retrofit para actualizar PLC obsoletos y mejorar la eficiencia del control.',
+        },
+        {
+          pregunta: '¿Cómo se conecta con supervisión HMI?',
+          respuestaHtml:
+            'El tablero de control se vincula a la capa de supervisión a través de redes industriales, lo que permite visualizar los datos del proceso en tiempo real en una interfaz HMI remota o local. <a href="/soluciones/supervision-hmi/" style="color:#101F2C">Ir a Supervisión HMI</a>.',
+          respuesta: '',
+        },
+      ],
+    },
+  ]}
+  bandaFinal={{
+    titulo: '¿Buscas automatizar tu proceso con rigor técnico y respaldo?',
+    palabraAcento: 'rigor',
+    botonTexto: 'Conversemos tu proyecto',
+  }}
+/>

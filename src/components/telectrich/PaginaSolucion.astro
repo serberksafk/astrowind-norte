@@ -1,0 +1,1579 @@
+---
+import TelectrichLayout from '~/layouts/TelectrichLayout.astro';
+import Riel from '~/components/telectrich/Riel.astro';
+import Faq from '~/components/telectrich/Faq.astro';
+import BandaFinal from '~/components/telectrich/BandaFinal.astro';
+import { Image } from 'astro:assets';
+import { CONTACTO } from '~/data/sitio';
+import type { ImageMetadata } from 'astro';
+
+import fuerzaEstructuraTaller from '~/assets/img/fuerza-estructura-taller.jpg';
+import distribucionSchneider from '~/assets/img/distribucion-schneider.jpg';
+import controlS7300 from '~/assets/img/control-s7-300.jpg';
+import plcAbbPm564 from '~/assets/img/plc-abb-pm564.jpg';
+import hmiNema4x from '~/assets/img/hmi-nema4x.jpg';
+import switchEmerson from '~/assets/img/switch-emerson.jpg';
+import redundanciaAlimentacion from '~/assets/img/redundancia-alimentacion.jpg';
+import sitopDobleFuente from '~/assets/img/sitop-doble-fuente.jpg';
+import cableadoTerminales from '~/assets/img/cableado-terminales.jpg';
+import modulosIoVerdes from '~/assets/img/modulos-io-verdes.jpg';
+import comunicacionesFibra from '~/assets/img/comunicaciones-fibra.jpg';
+
+const fotos: Record<string, ImageMetadata> = {
+  'fuerza-estructura-taller': fuerzaEstructuraTaller,
+  'distribucion-schneider': distribucionSchneider,
+  'control-s7-300': controlS7300,
+  'plc-abb-pm564': plcAbbPm564,
+  'hmi-nema4x': hmiNema4x,
+  'switch-emerson': switchEmerson,
+  'redundancia-alimentacion': redundanciaAlimentacion,
+  'sitop-doble-fuente': sitopDobleFuente,
+  'cableado-terminales': cableadoTerminales,
+  'modulos-io-verdes': modulosIoVerdes,
+  'comunicaciones-fibra': comunicacionesFibra,
+};
+
+export type Panel = { tag?: string; titulo: string; desc: string };
+export type ItemLista = { tag: string; titulo: string; desc: string };
+export type Foto = { src: string; alt: string; posicion?: string };
+export type Enlace = { texto: string; href: string };
+
+export type Seccion =
+  | { tipo: 'definicion'; titulo: string; contenido: string }
+  | {
+      tipo: 'paneles-fondo';
+      titulo: string;
+      intro?: string;
+      paneles: Panel[];
+      itemExtra?: { titulo: string; desc: string };
+      foto?: Foto & { tag?: string };
+    }
+  | { tipo: 'metodologia'; titulo: string; intro: string; pasos: { titulo: string; desc: string }[]; resultado: string }
+  | { tipo: 'alcance-control'; titulo: string; items: ItemLista[]; foto: Foto }
+  | { tipo: 'paneles-alcance'; titulo: string; intro: string; paneles: ItemLista[]; nota?: string }
+  | { tipo: 'integracion'; titulo: string; contenido: string; enlaces: Enlace[] }
+  | {
+      tipo: 'diferenciadores-fuerza';
+      titulo: string;
+      palabraAcento?: string;
+      item: { titulo: string; desc: string };
+      ticks: string[];
+      fotos: [Foto, Foto];
+    }
+  | { tipo: 'marcas-diseno'; titulo: string; palabraAcento?: string; intro: string; bullets: string[]; foto: Foto }
+  | {
+      tipo: 'pruebas-noche';
+      titulo: string;
+      contenido: string;
+      badges?: string[];
+      parrafoEnlace?: string;
+      enlace?: Enlace;
+    }
+  | { tipo: 'pruebas-fondo'; titulo: string; contenido: string; parrafoEnlace?: string; enlace?: Enlace }
+  | { tipo: 'arquitectura'; titulo: string; intro: string }
+  | {
+      tipo: 'valor';
+      titulo: string;
+      contenido: string;
+      parrafoExtra: string;
+      foto: Foto;
+      enlace?: Enlace;
+    }
+  | {
+      tipo: 'faq';
+      titulo: string;
+      variante?: 'blanco' | 'fondo';
+      items: { pregunta: string; respuesta: string; respuestaHtml?: string }[];
+    };
+
+export interface Props {
+  metadata: { title: string; description?: string };
+  migas: { texto: string; href?: string }[];
+  ramalIluminado: 1 | 2 | 3 | 4;
+  heroFoto: string;
+  heroAlt: string;
+  heroObjectPosition?: string;
+  heroAncho?: number;
+  heroAlto?: number;
+  titulo: string;
+  palabraAcento: string;
+  lead: string;
+  ctaPrimario: string;
+  ctaPrimarioHref?: string;
+  secciones: Seccion[];
+  bandaFinal: { titulo: string; palabraAcento: string; botonTexto: string };
+}
+
+const {
+  metadata,
+  migas,
+  ramalIluminado,
+  heroFoto,
+  heroAlt,
+  heroObjectPosition = '50% 50%',
+  heroAncho = 1200,
+  heroAlto = 1500,
+  titulo,
+  palabraAcento,
+  lead,
+  ctaPrimario,
+  ctaPrimarioHref = '/contacto/',
+  secciones,
+  bandaFinal,
+} = Astro.props;
+
+const whatsappUrl = CONTACTO.whatsapp;
+const heroImg = fotos[heroFoto];
+
+function procesarTitulo(texto: string, palabra: string): string {
+  if (!palabra) return texto;
+  const partes = texto.split(palabra);
+  if (partes.length === 1) return texto;
+  return partes.join(`<mark class="acento">${palabra}</mark>`);
+}
+
+const tituloHtml = procesarTitulo(titulo, palabraAcento);
+---
+
+<TelectrichLayout metadata={metadata}>
+  <section class="band band--canaleta sol-hero" aria-labelledby="hero-h1" data-cta-watch>
+    <div class="sol-hero-bg" aria-hidden="true">
+      <svg class="sol-unifilar" viewBox="0 0 1200 540" focusable="false" data-ramal-lit={ramalIluminado}>
+        <circle class="u-fill" pathLength="1" cx="100" cy="52" r="20" style="--dl:0s"></circle>
+        <path class="u-line" pathLength="1" d="M89 52q5.500-9 11 0t11 0" style="--dl:0.1s;--d:400ms"></path>
+        <path class="u-line" pathLength="1" d="M100 72V124" style="--dl:0.1s;--d:400ms"></path>
+        <rect class="u-fill" pathLength="1" x="86" y="124" width="28" height="40" rx="3" style="--dl:0.25s;--d:600ms"
+        ></rect>
+        <path class="u-line" pathLength="1" d="M92 158 108 130" style="--dl:0.35s;--d:300ms"></path>
+        <path class="u-line" pathLength="1" d="M100 164V240" style="--dl:0.3s;--d:400ms"></path>
+        <text class="u-text" x="150" y="148" text-anchor="middle" style="--dl:0.5s">Q1</text>
+        <path class="u-line u-bus" pathLength="1" d="M100 240H1100" style="--dl:0.6s;--d:800ms"></path>
+        <path class="u-line" data-ramal="1" pathLength="1" d="M230 240V500" style="--dl:0.9s;--d:600ms"></path>
+        <path class="u-line" data-ramal="2" pathLength="1" d="M500 240V500" style="--dl:1.02s;--d:600ms"></path>
+        <path class="u-line" data-ramal="3" pathLength="1" d="M770 240V500" style="--dl:1.1400000000000001s;--d:600ms"
+        ></path>
+        <path class="u-line" data-ramal="4" pathLength="1" d="M1040 240V500" style="--dl:1.26s;--d:600ms"></path>
+        <rect
+          class="u-fill"
+          data-ramal="1"
+          pathLength="1"
+          x="216"
+          y="292"
+          width="28"
+          height="46"
+          rx="3"
+          style="--dl:1s;--d:600ms"></rect>
+        <path class="u-line" data-ramal="1" pathLength="1" d="M222 332 238 298" style="--dl:1.1s;--d:300ms"></path>
+        <circle class="u-fill" data-ramal="1" pathLength="1" cx="230" cy="430" r="26" style="--dl:1.15s"></circle>
+        <text class="u-text" data-ramal="1" x="230" y="436" text-anchor="middle" style="--dl:1.2s">M</text>
+        <rect
+          class="u-fill"
+          data-ramal="2"
+          pathLength="1"
+          x="444"
+          y="296"
+          width="112"
+          height="80"
+          rx="3"
+          style="--dl:1.1s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="2"
+          pathLength="1"
+          x="458"
+          y="312"
+          width="24"
+          height="16"
+          rx="3"
+          style="--dl:1.2s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="2"
+          pathLength="1"
+          x="490"
+          y="312"
+          width="24"
+          height="16"
+          rx="3"
+          style="--dl:1.2s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="2"
+          pathLength="1"
+          x="522"
+          y="312"
+          width="24"
+          height="16"
+          rx="3"
+          style="--dl:1.2s;--d:600ms"></rect>
+        <path class="u-line" data-ramal="2" pathLength="1" d="M458 352H542" style="--dl:1.25s;--d:300ms"></path>
+        <rect
+          class="u-fill"
+          data-ramal="3"
+          pathLength="1"
+          x="708"
+          y="296"
+          width="124"
+          height="84"
+          rx="3"
+          style="--dl:1.2s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="3"
+          pathLength="1"
+          x="720"
+          y="306"
+          width="100"
+          height="56"
+          rx="3"
+          style="--dl:1.3s;--d:600ms"></rect>
+        <path class="u-line" data-ramal="3" pathLength="1" d="M750 392H790" style="--dl:1.35s;--d:300ms"></path>
+        <rect
+          class="u-fill"
+          data-ramal="4"
+          pathLength="1"
+          x="974"
+          y="300"
+          width="132"
+          height="46"
+          rx="3"
+          style="--dl:1.3s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="4"
+          pathLength="1"
+          x="990"
+          y="314"
+          width="18"
+          height="18"
+          rx="3"
+          style="--dl:1.4s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="4"
+          pathLength="1"
+          x="1018"
+          y="314"
+          width="18"
+          height="18"
+          rx="3"
+          style="--dl:1.4s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="4"
+          pathLength="1"
+          x="1046"
+          y="314"
+          width="18"
+          height="18"
+          rx="3"
+          style="--dl:1.4s;--d:600ms"></rect>
+        <rect
+          class="u-fill"
+          data-ramal="4"
+          pathLength="1"
+          x="1074"
+          y="314"
+          width="18"
+          height="18"
+          rx="3"
+          style="--dl:1.4s;--d:600ms"></rect>
+        <path
+          class="u-line"
+          data-ramal="4"
+          pathLength="1"
+          d="M1000 346V440M1040 346V460M1080 346V440"
+          style="--dl:1.4s;--d:400ms"></path>
+        <text class="u-text" data-ramal="1" x="230" y="530" text-anchor="middle" style="--dl:1.5s">01 FUERZA</text>
+        <text class="u-text" data-ramal="2" x="500" y="530" text-anchor="middle" style="--dl:1.55s">02 CONTROL</text>
+        <text class="u-text" data-ramal="3" x="770" y="530" text-anchor="middle" style="--dl:1.6s">03 SUPERVISIÓN</text>
+        <text class="u-text" data-ramal="4" x="1040" y="530" text-anchor="middle" style="--dl:1.65s"
+          >04 COMUNICACIONES</text
+        >
+      </svg>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="sol-hero-grid">
+        <div class="sol-hero-copy">
+          <nav class="sol-crumb" aria-label="Miga de pan">
+            {
+              migas.map((m, i) => (
+                <Fragment>
+                  {i > 0 && (
+                    <span aria-hidden="true" class="sol-crumb-sep">
+                      /
+                    </span>
+                  )}
+                  {m.href ? <a href={m.href}>{m.texto}</a> : <span aria-current="page">{m.texto}</span>}
+                </Fragment>
+              ))
+            }
+          </nav>
+          <h1 class="sol-h1" id="hero-h1" set:html={tituloHtml} />
+          <p class="sol-lead">{lead}</p>
+          <div class="sol-cta-row">
+            <a href={ctaPrimarioHref} class="sol-btn-primary">{ctaPrimario}</a>
+            <a href={whatsappUrl} class="sol-btn-outline" data-wa="hero">
+              <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                ></path>
+              </svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+        {
+          heroImg && (
+            <div class="sol-hero-photo">
+              <Image
+                src={heroImg}
+                alt={heroAlt}
+                width={heroAncho}
+                height={heroAlto}
+                class="sol-hero-img"
+                style={`object-position: ${heroObjectPosition};`}
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    secciones.map((sec) => {
+      if (sec.tipo === 'definicion') {
+        return (
+          <section class="band band--blanco fade-sol" aria-labelledby={`def-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-split">
+                <div class="sol-prose">
+                  <h2 class="sol-h2" id={`def-${sec.titulo}`} set:html={procesarTitulo(sec.titulo, '')} />
+                  <p class="sol-prose-p">{sec.contenido}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'paneles-fondo') {
+        const tieneFoto = !!sec.foto;
+        return (
+          <section class="band band--fondo" aria-labelledby={`alc-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class={`sol-feat ${tieneFoto ? 'sol-feat--con-foto' : 'sol-feat--solo'}`}>
+                <div class="sol-feat-a">
+                  <div class="sol-sec-head">
+                    <h2 class="sol-h2" id={`alc-${sec.titulo}`}>
+                      {sec.titulo}
+                    </h2>
+                    {sec.intro && <p>{sec.intro}</p>}
+                  </div>
+                  {sec.paneles.length > 0 && (
+                    <div class={`sol-panels sol-panels--${sec.paneles.length}`}>
+                      {sec.paneles.map((panel) => (
+                        <div class="sol-panel">
+                          {panel.tag && <span class="etiqueta">{panel.tag}</span>}
+                          <h3 class="sol-h3">{panel.titulo}</h3>
+                          <p>{panel.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {sec.itemExtra && (
+                    <div class="sol-item">
+                      <h3 class="sol-h3">{sec.itemExtra.titulo}</h3>
+                      <p>{sec.itemExtra.desc}</p>
+                    </div>
+                  )}
+                </div>
+                {tieneFoto && (
+                  <div class="sol-feat-b">
+                    <figure class={sec.foto?.tag ? 'sol-fig-tall' : 'sol-fig'}>
+                      <Image
+                        src={fotos[sec.foto!.src]}
+                        alt={sec.foto!.alt}
+                        width={1400}
+                        height={1866}
+                        loading="lazy"
+                        class="sol-fig-img"
+                        style={`object-position: ${sec.foto?.posicion ?? '50% 50%'};`}
+                      />
+                      {sec.foto?.tag && (
+                        <figcaption>
+                          <span class="etiqueta">{sec.foto.tag}</span>
+                        </figcaption>
+                      )}
+                    </figure>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'metodologia') {
+        return (
+          <section class="band band--fondo" aria-labelledby={`met-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-sec-head">
+                <h2 class="sol-h2" id={`met-${sec.titulo}`}>
+                  {sec.titulo}
+                </h2>
+                <p class="sol-lead-inline">{sec.intro}</p>
+              </div>
+              <Riel pasos={sec.pasos.map((p) => ({ titulo: p.titulo, descripcion: p.desc }))} />
+              <p class="sol-resultado">
+                <strong>Resultado:</strong> {sec.resultado}
+              </p>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'alcance-control') {
+        return (
+          <section class="band band--blanco" aria-labelledby={`alc-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-feat sol-feat--con-foto">
+                <div class="sol-feat-a">
+                  <div class="sol-sec-head sol-sec-head--no-margin">
+                    <h2 class="sol-h2" id={`alc-${sec.titulo}`}>
+                      {sec.titulo}
+                    </h2>
+                  </div>
+                  {sec.items.map((it) => (
+                    <div class="sol-item">
+                      <h3 class="sol-h3">
+                        <span class="etiqueta">{it.tag}</span> {it.titulo}
+                      </h3>
+                      <p>{it.desc}</p>
+                    </div>
+                  ))}
+                </div>
+                <div class="sol-feat-b">
+                  <figure class="sol-fig">
+                    <Image
+                      src={fotos[sec.foto.src]}
+                      alt={sec.foto.alt}
+                      width={1400}
+                      height={1088}
+                      loading="lazy"
+                      class="sol-fig-img"
+                      style={`object-position: ${sec.foto.posicion ?? '50% 50%'};`}
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'paneles-alcance') {
+        return (
+          <section class="band band--fondo" aria-labelledby={`alc-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-sec-head">
+                <h2 class="sol-h2" id={`alc-${sec.titulo}`}>
+                  {sec.titulo}
+                </h2>
+                <p class="sol-lead-inline">{sec.intro}</p>
+              </div>
+              <div class="sol-panels sol-panels--3">
+                {sec.paneles.map((panel) => (
+                  <div class="sol-panel">
+                    <span class="etiqueta">{panel.tag}</span>
+                    <h3 class="sol-h3">{panel.titulo}</h3>
+                    <p>{panel.desc}</p>
+                  </div>
+                ))}
+              </div>
+              {sec.nota && <p class="sol-nota">{sec.nota}</p>}
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'integracion') {
+        return (
+          <section class="band band--blanco" aria-labelledby={`int-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-split">
+                <div class="sol-prose">
+                  <h2 class="sol-h2" id={`int-${sec.titulo}`}>
+                    {sec.titulo}
+                  </h2>
+                  <p class="sol-prose-p">{sec.contenido}</p>
+                  <p class="sol-link-row">
+                    {sec.enlaces.map((e) => (
+                      <a class="sol-link-arrow" href={e.href}>
+                        {e.texto}
+                        <svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                      </a>
+                    ))}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'diferenciadores-fuerza') {
+        return (
+          <section class="band band--blanco" aria-labelledby={`dif-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-feat sol-feat--con-foto">
+                <div class="sol-feat-a">
+                  <div class="sol-sec-head sol-sec-head--no-margin">
+                    <h2
+                      class="sol-h2"
+                      id={`dif-${sec.titulo}`}
+                      set:html={procesarTitulo(sec.titulo, sec.palabraAcento ?? '')}
+                    />
+                  </div>
+                  <div class="sol-item">
+                    <h3 class="sol-h3">{sec.item.titulo}</h3>
+                    <p>{sec.item.desc}</p>
+                  </div>
+                  <ul class="sol-ticks">
+                    {sec.ticks.map((t) => (
+                      <li>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="sol-feat-b sol-feat-b--stack">
+                  <figure class="sol-fig">
+                    <Image
+                      src={fotos[sec.fotos[0].src]}
+                      alt={sec.fotos[0].alt}
+                      width={1400}
+                      height={1360}
+                      loading="lazy"
+                      class="sol-fig-img"
+                      style={`object-position: ${sec.fotos[0].posicion ?? '50% 50%'};`}
+                    />
+                  </figure>
+                  <figure class="sol-fig">
+                    <Image
+                      src={fotos[sec.fotos[1].src]}
+                      alt={sec.fotos[1].alt}
+                      width={960}
+                      height={1280}
+                      loading="lazy"
+                      class="sol-fig-img"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'marcas-diseno') {
+        return (
+          <section class="band band--noche" aria-labelledby={`mar-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-feat sol-feat--con-foto">
+                <div class="sol-feat-a">
+                  <h2
+                    class="sol-h2"
+                    id={`mar-${sec.titulo}`}
+                    set:html={procesarTitulo(sec.titulo, sec.palabraAcento ?? '')}
+                  />
+                  <p class="sol-prose-p">{sec.intro}</p>
+                  <ul class="sol-ticks">
+                    {sec.bullets.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="sol-feat-b">
+                  <figure class="sol-fig-tall">
+                    <Image
+                      src={fotos[sec.foto.src]}
+                      alt={sec.foto.alt}
+                      width={1200}
+                      height={1600}
+                      loading="lazy"
+                      class="sol-fig-img"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'pruebas-noche') {
+        return (
+          <section class="band band--noche" aria-labelledby={`pru-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-split">
+                <div class="sol-prose">
+                  <h2 class="sol-h2" id={`pru-${sec.titulo}`}>
+                    {sec.titulo}
+                  </h2>
+                  <p class="sol-prose-p">{sec.contenido}</p>
+                  {sec.badges && sec.badges.length > 0 && (
+                    <div class="sol-badges">
+                      {sec.badges.map((b) => (
+                        <span class="etiqueta">{b}</span>
+                      ))}
+                    </div>
+                  )}
+                  {sec.enlace && (
+                    <p class="sol-prose-p">
+                      <a class="sol-link-arrow" href={sec.enlace.href}>
+                        {sec.enlace.texto}
+                        <svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                      </a>
+                    </p>
+                  )}
+                  {sec.parrafoEnlace && <p class="sol-prose-p">{sec.parrafoEnlace}</p>}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'pruebas-fondo') {
+        return (
+          <section class="band band--fondo" aria-labelledby={`pru-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-split">
+                <div class="sol-prose">
+                  <h2 class="sol-h2" id={`pru-${sec.titulo}`}>
+                    {sec.titulo}
+                  </h2>
+                  <p class="sol-prose-p">{sec.contenido}</p>
+                  {sec.enlace && (
+                    <p class="sol-prose-p">
+                      <a class="sol-link-arrow" href={sec.enlace.href}>
+                        {sec.enlace.texto}
+                        <svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                      </a>
+                    </p>
+                  )}
+                  {sec.parrafoEnlace && <p class="sol-prose-p">{sec.parrafoEnlace}</p>}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'arquitectura') {
+        return (
+          <section class="band band--noche" aria-labelledby={`arq-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-sec-head">
+                <h2 class="sol-h2" id={`arq-${sec.titulo}`}>
+                  {sec.titulo}
+                </h2>
+                <p class="sol-lead-inline">{sec.intro}</p>
+              </div>
+              <svg
+                class="sol-arch-svg"
+                viewBox="0 0 900 120"
+                role="img"
+                aria-label="Tres niveles de una red industrial: campo, control y supervisión"
+                fill="none"
+                stroke="#FFCB08"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path class="sol-arch-line" d="M110 60H340" pathLength="1" />
+                <path class="sol-arch-line" d="M560 60H790" pathLength="1" />
+                <circle class="sol-arch-node" cx="90" cy="60" r="20" fill="#152C3D" />
+                <rect class="sol-arch-node" x="340" y="38" width="220" height="44" rx="4" fill="#152C3D" />
+                <rect class="sol-arch-node" x="790" y="34" width="70" height="52" rx="4" fill="#152C3D" />
+                <path d="M335 60l-8-5v10zM795 60l-8-5v10z" fill="#FFCB08" stroke="none" />
+              </svg>
+              <div class="sol-arch">
+                <div class="sol-arch-lv">
+                  <span class="etiqueta">N1</span>
+                  <h3 class="sol-h3">Campo</h3>
+                  <p>Sensores, actuadores y equipos de planta.</p>
+                </div>
+                <div class="sol-arch-lv">
+                  <span class="etiqueta">N2</span>
+                  <h3 class="sol-h3">Control</h3>
+                  <p>PLC y tableros de control.</p>
+                  <a class="sol-link-arrow" href="/soluciones/tableros-de-control/">
+                    Ver tableros de control
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="sol-arch-lv">
+                  <span class="etiqueta">N3</span>
+                  <h3 class="sol-h3">Supervisión</h3>
+                  <p>Interfaces HMI y visualización.</p>
+                  <a class="sol-link-arrow" href="/soluciones/supervision-hmi/">
+                    Ver Supervisión HMI
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 8h10M9 4l4 4-4 4" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'valor') {
+        return (
+          <section class="band band--blanco" aria-labelledby={`val-${sec.titulo}`}>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-feat sol-feat--con-foto">
+                <div class="sol-feat-a sol-prose">
+                  <h2 class="sol-h2" id={`val-${sec.titulo}`}>
+                    {sec.titulo}
+                  </h2>
+                  <p class="sol-prose-p">{sec.contenido}</p>
+                  <p class="sol-prose-p">
+                    {sec.parrafoExtra}
+                    {sec.enlace && (
+                      <>
+                        {' '}
+                        <a class="sol-link-arrow" href={sec.enlace.href}>
+                          {sec.enlace.texto}
+                          <svg
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                          </svg>
+                        </a>
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div class="sol-feat-b">
+                  <figure class="sol-fig">
+                    <Image
+                      src={fotos[sec.foto.src]}
+                      alt={sec.foto.alt}
+                      width={960}
+                      height={1280}
+                      loading="lazy"
+                      class="sol-fig-img"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      if (sec.tipo === 'faq') {
+        const variante = sec.variante ?? 'blanco';
+        const tieneHtml = sec.items.some((it) => it.respuestaHtml);
+        if (tieneHtml) {
+          return (
+            <section
+              class:list={['band', variante === 'fondo' ? 'band--fondo' : 'band--blanco']}
+              aria-labelledby={`faq-${sec.titulo}`}
+            >
+              <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="sol-sec-head">
+                  <h2 class="sol-h2" id={`faq-${sec.titulo}`}>
+                    {sec.titulo}
+                  </h2>
+                </div>
+                <div class="faq">
+                  {sec.items.map((it) => (
+                    <details class="faq-item">
+                      <summary class="faq-pregunta">
+                        {it.pregunta}
+                        <svg
+                          class="faq-icon"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="m5 8 5 5 5-5" />
+                        </svg>
+                      </summary>
+                      <div class="faq-respuesta">
+                        <p set:html={it.respuestaHtml} />
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        }
+        const faqNormalizado = sec.items.map((it) => ({
+          pregunta: it.pregunta,
+          respuesta: it.respuestaHtml ?? it.respuesta,
+        }));
+        return (
+          <section
+            class:list={['band', variante === 'fondo' ? 'band--fondo' : 'band--blanco']}
+            aria-labelledby={`faq-${sec.titulo}`}
+          >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+              <div class="sol-sec-head">
+                <h2 class="sol-h2" id={`faq-${sec.titulo}`}>
+                  {sec.titulo}
+                </h2>
+              </div>
+              <Faq items={faqNormalizado} />
+            </div>
+          </section>
+        );
+      }
+
+      return null;
+    })
+  }
+
+  <BandaFinal titulo={bandaFinal.titulo} palabraAcento={bandaFinal.palabraAcento} botonTexto={bandaFinal.botonTexto} />
+</TelectrichLayout>
+
+<style is:global>
+  /* --- Static unifilar (hero de las páginas de solución) ---
+     El F0 Unifilar.astro usa opacity inline, lo que impide iluminar un ramal
+     con .u-lit sin tocar F0. Aquí re-renderizamos el SVG con la clase
+     [data-ramal-lit] y la opacidad se maneja por CSS (unlit a 0.16, lit a 1). */
+  .sol-hero {
+    overflow: hidden;
+  }
+
+  .sol-hero-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .sol-unifilar {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    opacity: 0.16;
+  }
+
+  .sol-unifilar .u-fill,
+  .sol-unifilar .u-line,
+  .sol-unifilar .u-text {
+    stroke: #ffcb08;
+    fill: #ffcb08;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .sol-unifilar .u-bus {
+    stroke-width: 2;
+  }
+
+  .sol-unifilar .u-text {
+    stroke: none;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Ramal iluminado: opacidad 1, color lleno. */
+  .sol-unifilar[data-ramal-lit='1'] [data-ramal='1'],
+  .sol-unifilar[data-ramal-lit='2'] [data-ramal='2'],
+  .sol-unifilar[data-ramal-lit='3'] [data-ramal='3'],
+  .sol-unifilar[data-ramal-lit='4'] [data-ramal='4'] {
+    opacity: 1;
+  }
+
+  /* Dibujo con stroke-dashoffset (CSS, una vez). */
+  @media (prefers-reduced-motion: no-preference) {
+    .sol-unifilar .u-line,
+    .sol-unifilar .u-fill,
+    .sol-unifilar .u-text {
+      animation-duration: var(--d, 600ms);
+      animation-delay: var(--dl, 0s);
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .sol-unifilar .u-line {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation-name: sol-unifilar-draw;
+    }
+
+    .sol-unifilar .u-fill {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation-name: sol-unifilar-pop;
+    }
+
+    .sol-unifilar .u-text {
+      animation-name: sol-unifilar-fade;
+    }
+
+    @keyframes sol-unifilar-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes sol-unifilar-pop {
+      from {
+        opacity: 0;
+        transform: scale(0.6);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes sol-unifilar-fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* --- Layout del hero --- */
+  .sol-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .sol-hero-grid {
+      grid-template-columns: 7fr 5fr;
+      gap: 4rem;
+    }
+  }
+
+  .sol-hero-copy {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .sol-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+  }
+
+  .sol-crumb a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+
+  .sol-crumb a:hover {
+    color: #ffcb08;
+  }
+
+  .sol-crumb-sep {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .sol-crumb [aria-current='page'] {
+    color: #ffcb08;
+  }
+
+  .sol-h1 {
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    font-size: clamp(2rem, 1.1rem + 3.6vw, 4rem);
+    margin: 0;
+  }
+
+  .sol-lead {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+    line-height: 1.55;
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .sol-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .sol-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    background-color: #ffcb08;
+    color: #101f2c;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .sol-btn-primary:hover {
+    background-color: rgba(255, 203, 8, 0.9);
+  }
+
+  .sol-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .sol-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .sol-hero-photo {
+    position: relative;
+  }
+
+  .sol-hero-img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+    max-height: 540px;
+  }
+
+  /* --- Secciones de página --- */
+  .sol-h2 {
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+    color: #101f2c;
+    margin: 0;
+  }
+
+  .band--noche .sol-h2,
+  .band--noche .sol-h3 {
+    color: #ffffff;
+  }
+
+  .sol-h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #101f2c;
+    margin: 0 0 0.5rem;
+  }
+
+  .sol-prose {
+    max-width: 62ch;
+  }
+
+  .sol-prose-p {
+    color: #586a78;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 1.5rem 0 0;
+  }
+
+  .band--noche .sol-prose-p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .sol-sec-head {
+    margin-bottom: 2.5rem;
+  }
+
+  .sol-sec-head--no-margin {
+    margin-bottom: 0;
+  }
+
+  .sol-sec-head p {
+    color: #586a78;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin: 1rem 0 0;
+    max-width: 62ch;
+  }
+
+  .sol-lead-inline {
+    color: #586a78;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin: 1rem 0 0;
+    max-width: 62ch;
+  }
+
+  .sol-split {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* --- Layout feat (texto + foto) --- */
+  .sol-feat {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .sol-feat--con-foto {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: 4rem;
+    }
+  }
+
+  .sol-feat-a {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sol-panels {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .sol-panels--2 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .sol-panels--2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .sol-panels--3 {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .sol-panels--3 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sol-panels--3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .sol-panel {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border: 1px solid #e3e8ec;
+    border-radius: 6px;
+  }
+
+  .band--noche .sol-panel {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .sol-panel h3 {
+    margin-top: 0.75rem;
+  }
+
+  .sol-panel p {
+    color: #586a78;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0.5rem 0 0;
+  }
+
+  .band--noche .sol-panel p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .sol-item {
+    margin-top: 1.5rem;
+  }
+
+  .sol-item p {
+    color: #586a78;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0.5rem 0 0;
+  }
+
+  .sol-ticks {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .sol-ticks li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: #586a78;
+  }
+
+  .band--noche .sol-ticks li {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .sol-ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #ffcb08;
+  }
+
+  .sol-fig,
+  .sol-fig-tall {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #f3f6f8;
+  }
+
+  .sol-fig-tall {
+    aspect-ratio: 4 / 5;
+  }
+
+  .sol-fig-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .sol-fig-tall .sol-fig-img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .sol-fig figcaption {
+    padding: 0.75rem 0 0;
+  }
+
+  .sol-feat-b {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sol-feat-b .sol-fig {
+    aspect-ratio: 4 / 3;
+  }
+
+  .sol-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .sol-link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .sol-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: #101f2c;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .sol-link-arrow svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .sol-link-arrow:hover {
+    color: #152c3d;
+    border-bottom-color: #ffcb08;
+  }
+
+  .band--noche .sol-link-arrow {
+    color: #ffffff;
+  }
+
+  .band--noche .sol-link-arrow:hover {
+    color: #ffcb08;
+  }
+
+  /* --- FAQ (renderizado inline cuando hay HTML en respuestas) --- */
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e3e8ec;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-pregunta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.25rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    list-style: none;
+    color: #101f2c;
+  }
+
+  .faq-pregunta::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-pregunta:hover {
+    color: #152c3d;
+  }
+
+  .faq-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    transition: transform 0.18s ease-out;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-respuesta {
+    padding-bottom: 1.25rem;
+    color: #586a78;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .faq-respuesta p {
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon {
+      transition: none;
+    }
+  }
+
+  .sol-resultado {
+    margin-top: 2rem;
+    max-width: 62ch;
+    color: #586a78;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .sol-resultado strong {
+    color: #101f2c;
+  }
+
+  .sol-nota {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: #586a78;
+    max-width: 62ch;
+    margin: 1.5rem 0 0;
+  }
+
+  /* --- SVG arquitectura comunicaciones (3 niveles) --- */
+  .sol-arch-svg {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    margin: 2rem auto 2.5rem;
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sol-arch-line {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: sol-arch-draw 800ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      animation-delay: 100ms;
+    }
+
+    @keyframes sol-arch-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+
+  .sol-arch {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .sol-arch {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .sol-arch-lv {
+    padding: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+  }
+
+  .sol-arch-lv p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin: 0.5rem 0;
+  }
+
+  .sol-arch-lv h3 {
+    margin: 0.5rem 0;
+  }
+
+  /* --- Fade in de secciones --- */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-sol {
+      animation: sol-fade-in 240ms ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
+    }
+
+    @keyframes sol-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sol-unifilar,
+    .sol-unifilar *,
+    .sol-arch-svg *,
+    .fade-sol {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

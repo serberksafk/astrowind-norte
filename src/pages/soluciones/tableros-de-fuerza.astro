@@ -1,11 +1,121 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import PaginaSolucion from '~/components/telectrich/PaginaSolucion.astro';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Tableros de fuerza' };
+const metadata = {
+  title: 'Tableros de fuerza y control de motores | Telectrich',
+  description:
+    'Tableros de fuerza y control a medida: TDA, TDF y alimentación redundante. Diseño alineado con RIC N°2 e IEC 61439, con pruebas FAT antes del despacho.',
+};
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Tableros de fuerza" />
-</Layout>
+<PaginaSolucion
+  metadata={metadata}
+  migas={[
+    { texto: 'Inicio', href: '/' },
+    { texto: 'Soluciones', href: '/soluciones/' },
+    { texto: 'Tableros de fuerza' },
+  ]}
+  ramalIluminado={1}
+  heroFoto="fuerza-estructura-taller"
+  heroAlt="Estructura y barras de un tablero de fuerza en fabricación"
+  heroObjectPosition="50% 50%"
+  heroAncho={1013}
+  heroAlto={954}
+  titulo="Tableros de fuerza y control de motores: TDA y TDF"
+  palabraAcento="TDF"
+  lead="Distribución eléctrica industrial diseñada para la continuidad operacional, con rigor normativo y respaldo técnico."
+  ctaPrimario="Cotizar tablero de fuerza"
+  secciones={[
+    {
+      tipo: 'definicion',
+      titulo: '¿Qué es un tablero de fuerza?',
+      contenido:
+        'Un tablero de fuerza (o gabinete de fuerza) es el núcleo de la infraestructura eléctrica de una planta. Diseñamos y fabricamos tableros de fuerza y control para la distribución y alimentación de cargas, integrando protecciones y dispositivos de maniobra configurados según los requerimientos eléctricos de tu proceso.',
+    },
+    {
+      tipo: 'paneles-fondo',
+      titulo: 'Tipos de tableros de fuerza que fabricamos',
+      intro:
+        'Cubrimos la distribución de alumbrado y fuerza, con protecciones coordinadas y alimentación redundante para procesos críticos.',
+      paneles: [
+        {
+          tag: 'TDA',
+          titulo: 'Tablero de distribución de alumbrado',
+          desc: 'Reparte la energía a los circuitos de alumbrado y enchufes, normalmente a nivel monofásico, con selectividad y protección de los equipos aguas abajo.',
+        },
+        {
+          tag: 'TDF',
+          titulo: 'Tablero de distribución de fuerza',
+          desc: 'Alimenta las cargas mayores a nivel trifásico, como motores, asegurando la estabilidad de la carga. Normalmente depende de un tablero general de distribución.',
+        },
+      ],
+      itemExtra: {
+        titulo: 'Protecciones y envolventes',
+        desc: 'Selección de envolventes adaptados al entorno de instalación (industrial, corrosivo o polvoriento) y dispositivos de protección coordinados para evitar paradas no programadas.',
+      },
+      foto: {
+        src: 'distribucion-schneider',
+        alt: 'Tablero de distribución con interruptores en riel',
+        posicion: '50% 50%',
+        tag: 'TDF',
+      },
+    },
+    {
+      tipo: 'diferenciadores-fuerza',
+      titulo: 'Alimentación redundante y diseño para la mantenibilidad',
+      palabraAcento: 'mantenibilidad',
+      item: {
+        titulo: 'Alimentación redundante',
+        desc: 'Sistemas de alimentación redundante para procesos críticos que no admiten interrupción del suministro eléctrico.',
+      },
+      ticks: [
+        'Rigor normativo: diseños alineados con el Pliego Técnico RIC N°2 (SEC Chile) y la serie IEC 61439.',
+        'Componentes de marcas reconocidas: Siemens, ABB, Schneider Electric y Rockwell Automation, entre otras.',
+        'Diseño para la mantenibilidad: ordenamiento interno y etiquetado profesional que reduce los tiempos de diagnóstico y reparación en terreno.',
+      ],
+      fotos: [
+        {
+          src: 'redundancia-alimentacion',
+          alt: 'Alimentación principal y redundante rotuladas en un tablero',
+          posicion: '50% 25%',
+        },
+        { src: 'sitop-doble-fuente', alt: 'Gabinete con doble fuente de alimentación' },
+      ],
+    },
+    {
+      tipo: 'pruebas-noche',
+      titulo: 'Validación en fábrica y terreno',
+      contenido:
+        'Todo tablero de fuerza incluye un ciclo de validación técnica para eliminar riesgos antes del arranque. Incluimos pruebas FAT protocolizadas y, cuando el proyecto lo requiere, SAT en terreno, asegurando que cada dispositivo de maniobra y protección funcione según el diseño.',
+      badges: ['FAT', 'SAT'],
+      enlace: { texto: 'Conoce nuestras pruebas en fábrica y en terreno', href: '/pruebas-fat-sat-y-comisionamiento/' },
+    },
+    {
+      tipo: 'faq',
+      titulo: 'Preguntas frecuentes',
+      variante: 'blanco',
+      items: [
+        {
+          pregunta: '¿Qué diferencia un TDA de un TDF?',
+          respuesta:
+            'El TDA (tablero de distribución de alumbrado) se usa normalmente en proyectos monofásicos, y no se limita a la iluminación: también puede proteger enchufes. El TDF (tablero de distribución de fuerza) alimenta cargas mayores a nivel trifásico, como motores.',
+        },
+        {
+          pregunta: '¿Con qué marcas trabajan?',
+          respuesta:
+            'Trabajamos con componentes de Siemens, ABB, Schneider Electric y Rockwell Automation, entre otras, y elegimos según las especificaciones de cada proyecto.',
+        },
+        {
+          pregunta: '¿El tablero incluye pruebas antes del despacho?',
+          respuesta:
+            'Sí. Cada tablero pasa por pruebas FAT (prueba de aceptación en fábrica) para validar su funcionamiento antes de salir de nuestro taller en Buin.',
+        },
+      ],
+    },
+  ]}
+  bandaFinal={{
+    titulo: '¿Necesitas un tablero de fuerza con un estándar de alto nivel?',
+    palabraAcento: 'estándar',
+    botonTexto: 'Conversemos tu proyecto',
+  }}
+/>
