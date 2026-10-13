@@ -7,6 +7,8 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+@custom-variant motion-ok (@media (prefers-reduced-motion: no-preference));
+
 @custom-variant intersect (&:not([no-intersect]));
 
 @theme {
@@ -253,4 +255,107 @@
 .dark .astro-code span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
+}
+
+/* ---------- Telectrich band system (global) ---------- */
+@layer components {
+  .band {
+    position: relative;
+    padding-block: clamp(64px, 9vw, 128px);
+  }
+
+  .band--noche {
+    background-color: var(--color-noche);
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .band--noche h1,
+  .band--noche h2,
+  .band--noche h3 {
+    color: #ffffff;
+  }
+
+  .band--noche .acento {
+    color: var(--color-acento);
+    background-color: transparent;
+  }
+
+  .band--blanco {
+    background-color: #ffffff;
+    color: var(--color-noche);
+  }
+
+  .band--fondo {
+    background-color: var(--color-fondo);
+    color: var(--color-noche);
+  }
+
+  .band--canaleta {
+    background-color: var(--color-noche);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 0 6px,
+      transparent 6px 14px
+    );
+    color: #ffffff;
+  }
+
+  .band--canaleta h1,
+  .band--canaleta h2,
+  .band--canaleta h3 {
+    color: #ffffff;
+  }
+
+  .band--canaleta .acento {
+    color: var(--color-acento);
+    background-color: transparent;
+  }
+
+  .band--sm {
+    padding-block: clamp(48px, 6vw, 80px);
+  }
+}
+
+/* Reveal animations: only when JS is on AND user has no reduced-motion preference.
+   Cards are always visible — the .revealed class triggers a one-shot fade-in
+   when the card enters the viewport. */
+.tarjeta-solucion {
+  opacity: 1;
+}
+
+html.js.motion-ok .tarjeta-solucion[data-reveal] {
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+html.js.motion-ok .tarjeta-solucion[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .tarjeta-solucion[data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Marca logos: monochrome cuerpo via mask-image. Set --logo-url per <img>. */
+.marca-logo {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  -webkit-mask-image: var(--logo-url);
+  mask-image: var(--logo-url);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background-color: var(--color-cuerpo);
+  display: block;
 }

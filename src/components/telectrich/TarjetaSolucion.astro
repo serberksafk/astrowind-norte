@@ -22,14 +22,14 @@ const fotos: Record<string, ImageMetadata> = {
 const imgSrc = fotos[solucion.foto] || distSchneider;
 ---
 
-<article class="tarjeta-solucion">
+<article class="tarjeta-solucion" data-reveal>
   <figure class="tarjeta-foto">
     <Image
       src={imgSrc}
       alt={solucion.alt}
       width={800}
       height={600}
-      class="w-full h-auto object-cover rounded-md aspect-[4/3]"
+      class="tarjeta-img"
       loading="lazy"
     />
   </figure>
@@ -60,6 +60,15 @@ const imgSrc = fotos[solucion.foto] || distSchneider;
     margin: 0;
     overflow: hidden;
     border-radius: 6px;
+    aspect-ratio: 4 / 3;
+    background-color: var(--color-fondo);
+  }
+
+  .tarjeta-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .tarjeta-body {

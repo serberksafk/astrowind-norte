@@ -207,6 +207,18 @@ const showBar = bar && !isNoBarPage;
       }
     }
   </script>
+
+  <script>
+    import { initReveal } from '~/scripts/reveal';
+
+    const start = () => initReveal();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start, { once: true });
+    } else {
+      start();
+    }
+    document.addEventListener('astro:page-load', start);
+  </script>
 </Layout>
 
 <style>

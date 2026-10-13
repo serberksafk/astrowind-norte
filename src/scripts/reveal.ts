@@ -1,32 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+export function initReveal(): void {
+  if (typeof window === 'undefined') return;
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotionQuery.matches) return;
 
-  if (prefersReducedMotion) return;
-
-  const cards = document.querySelectorAll('[data-reveal]');
-
+  const cards = document.querySelectorAll<HTMLElement>('[data-reveal]');
   if (cards.length === 0) return;
 
-  let ticking = false;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+  );
 
-  function revealCards() {
-    cards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight * 0.85;
-      if (isVisible) {
-        card.classList.add('revealed');
-      }
-    });
-    ticking = false;
+  cards.forEach((card) => observer.observe(card));
+}
+
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal, { once: true });
+  } else {
+    initReveal();
   }
 
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(revealCards);
-      ticking = true;
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  revealCards();
-});
+  // Re-init after Astro view transitions.
+  document.addEventListener('astro:page-load', initReveal);
+}

@@ -2,19 +2,20 @@
 export interface Props {
   variante?: 'noche' | 'blanco' | 'fondo' | 'canaleta';
   clase?: string;
+  pequena?: boolean;
 }
 
-const { variante = 'blanco', clase = '' } = Astro.props;
+const { variante = 'blanco', clase = '', pequena = false } = Astro.props;
 
 const clases = {
-  noche: 'bg-noche text-white',
-  blanco: 'bg-white text-noche',
-  fondo: 'bg-fondo text-noche',
-  canaleta: 'bg-noche canaleta text-white',
+  noche: 'band--noche',
+  blanco: 'band--blanco',
+  fondo: 'band--fondo',
+  canaleta: 'band--canaleta',
 };
 ---
 
-<section class:list={['py-12 lg:py-16', clases[variante], clase]}>
+<section class:list={['band', clases[variante], pequena && 'band--sm', clase]}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <slot />
   </div>

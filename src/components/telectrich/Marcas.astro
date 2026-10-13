@@ -29,7 +29,7 @@ function getLogoSrc(nombre: string): string | undefined {
     return (
       <li class="marca-item">
         {logoSrc ? (
-          <img src={logoSrc} alt={marca.nombre} class="marca-logo" />
+          <img src={logoSrc} alt={marca.nombre} class="marca-logo" style={`--logo-url: url("${logoSrc}")`} />
         ) : (
           <span class="marca-texto">{marca.nombre}</span>
         )}
@@ -62,18 +62,17 @@ function getLogoSrc(nombre: string): string | undefined {
   }
 
   .marca-logo {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    filter: grayscale(100%) opacity(0.6);
+    /* Global mask + background-cuerpo styling lives in tailwind.css.
+       Here we ensure a sensible fallback while the image is loading. */
+    background-color: var(--color-cuerpo);
   }
 
   .marca-texto {
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    color: #586A78;
+    color: var(--color-cuerpo);
     text-align: center;
+    text-transform: uppercase;
   }
 </style>

@@ -11,9 +11,10 @@ const { href, variante = 'primario', texto, clase = '', ariaLabel } = Astro.prop
 
 const clases = {
   primario: 'bg-acento text-noche hover:bg-acento/90 focus:ring-acento',
-  secundario: 'bg-noche text-white hover:bg-noche/90 border-2 border-noche focus:ring-noche',
+  secundario: 'bg-transparent text-white border-2 border-white/60 hover:bg-white hover:text-noche hover:border-white focus:ring-white',
   'secundario-claro': 'bg-transparent text-noche border-2 border-noche hover:bg-noche hover:text-white focus:ring-noche',
-  whatsapp: 'bg-transparent text-white border-2 border-white hover:bg-white hover:text-noche',
+  whatsapp:
+    'bg-[#25D366] text-noche border-2 border-[#25D366] hover:bg-[#1ebe5b] hover:border-[#1ebe5b] focus:ring-[#25D366]',
 };
 
 const cls = clases[variante] || clases.primario;
