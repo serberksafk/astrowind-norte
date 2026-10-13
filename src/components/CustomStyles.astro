@@ -1,14 +1,14 @@
 ---
 // Font family is provided by Astro's native Fonts API (see `fonts` in
-// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`.
+// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-plex-sans` / `--font-plex-mono`.
 // To switch typefaces, change the `fonts` entry and repoint `--aw-font-*` below.
 ---
 
 <style is:inline>
   :root {
-    --aw-font-sans: var(--font-inter);
-    --aw-font-serif: var(--font-inter);
-    --aw-font-heading: var(--font-inter);
+    --aw-font-sans: var(--font-plex-sans);
+    --aw-font-serif: var(--font-plex-sans);
+    --aw-font-heading: var(--font-plex-sans);
 
     --aw-color-primary: rgb(16 31 44);
     --aw-color-secondary: rgb(21 44 61);
@@ -27,9 +27,9 @@
   }
 
   .dark {
-    --aw-font-sans: var(--font-inter);
-    --aw-font-serif: var(--font-inter);
-    --aw-font-heading: var(--font-inter);
+    --aw-font-sans: var(--font-plex-sans);
+    --aw-font-serif: var(--font-plex-sans);
+    --aw-font-heading: var(--font-plex-sans);
 
     --aw-color-primary: rgb(255 203 8);
     --aw-color-secondary: rgb(245 197 24);

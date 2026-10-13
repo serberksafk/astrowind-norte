@@ -38,13 +38,25 @@ export default defineConfig({
   // consumed through the `--font-inter` CSS variable in CustomStyles.astro.
   fonts: [
     {
-      provider: fontProviders.fontsource(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
-      styles: ['normal'],
-      subsets: ['latin'],
+      provider: fontProviders.local(),
+      name: 'IBM Plex Sans',
+      cssVariable: '--font-plex-sans',
+      options: {
+        variants: [
+          { weight: 400, style: 'normal', src: ['./src/assets/fonts/ibm-plex-sans-latin-400-normal.woff2'] },
+          { weight: 600, style: 'normal', src: ['./src/assets/fonts/ibm-plex-sans-latin-600-normal.woff2'] },
+        ],
+      },
       fallbacks: ['sans-serif'],
+    },
+    {
+      provider: fontProviders.local(),
+      name: 'IBM Plex Mono',
+      cssVariable: '--font-plex-mono',
+      options: {
+        variants: [{ weight: 500, style: 'normal', src: ['./src/assets/fonts/ibm-plex-mono-latin-500-normal.woff2'] }],
+      },
+      fallbacks: ['monospace'],
     },
   ],
 

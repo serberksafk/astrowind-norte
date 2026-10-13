@@ -2,8 +2,7 @@
 import { SITE } from 'astrowind:config';
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
+<span class="self-center ml-2 rtl:ml-0 rtl:mr-2 flex items-center">
+  <img src="/logo/TLT_H_Color.png" alt={SITE?.name} width="134" height="32" class="h-8 w-auto dark:hidden" />
+  <img src="/logo/TLT_H_Diapo.png" alt={SITE?.name} width="134" height="32" class="hidden h-8 w-auto dark:block" />
 </span>
