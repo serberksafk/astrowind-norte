@@ -1,11 +1,107 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import PaginaSolucion from '~/components/telectrich/PaginaSolucion.astro';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Comunicación industrial' };
+const metadata = {
+  title: 'Redes de comunicación industrial: Ethernet y fibra óptica | Telectrich',
+  description:
+    'Redes de comunicación industrial: switches, Ethernet industrial y fibra óptica entre campo, control y supervisión.',
+};
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Comunicación industrial" />
-</Layout>
+<PaginaSolucion
+  metadata={metadata}
+  migas={[
+    { texto: 'Inicio', href: '/' },
+    { texto: 'Soluciones', href: '/soluciones/' },
+    { texto: 'Comunicación industrial' },
+  ]}
+  ramalIluminado={4}
+  heroFoto="switch-emerson"
+  heroAlt="Switch industrial montado en un tablero de comunicaciones"
+  heroObjectPosition="50% 40%"
+  heroAncho={1400}
+  heroAlto={1866}
+  titulo="Redes de comunicación industrial: Ethernet y fibra óptica para planta"
+  palabraAcento="fibra óptica"
+  lead="Diseñamos redes industriales robustas, para que cada dato fluya con precisión desde el sensor hasta la pantalla."
+  ctaPrimario="Cotizar infraestructura de red"
+  secciones={[
+    {
+      tipo: 'definicion',
+      titulo: '¿Qué es una red de comunicación industrial?',
+      contenido:
+        'La red de comunicación industrial conecta los equipos de campo, el control y la supervisión de la planta. Integramos redes que permiten que sistemas de distintas marcas se comuniquen y operen de forma coordinada según la arquitectura del proyecto.',
+    },
+    {
+      tipo: 'paneles-alcance',
+      titulo: 'Componentes de una red industrial',
+      intro: 'Diseñamos la infraestructura de conectividad necesaria para una operación inteligente y transparente.',
+      paneles: [
+        {
+          tag: 'SW',
+          titulo: 'Switches industriales y enlaces',
+          desc: 'Suministro e integración de switches industriales y enlaces de comunicación diseñados para resistir entornos hostiles.',
+        },
+        {
+          tag: 'FO',
+          titulo: 'Ethernet industrial y fibra óptica',
+          desc: 'Backbones de fibra óptica y redes Ethernet industriales para asegurar alta velocidad de transmisión y blindaje contra interferencias electromagnéticas.',
+        },
+        {
+          tag: 'VER',
+          titulo: 'Verificación de comunicaciones',
+          desc: 'Pruebas de conectividad y validación del tráfico de datos para que la comunicación sea estable.',
+        },
+      ],
+      nota: 'Integramos diversos protocolos industriales (como Ethernet/IP, Profibus y Modbus, entre otros) según los requerimientos de cada proyecto.',
+    },
+    {
+      tipo: 'arquitectura',
+      titulo: 'Niveles de una red industrial: campo, control y supervisión',
+      intro:
+        'La red es el enlace entre las capas de la planta. Una red bien integrada evita la fragmentación de la información y es la base de cualquier sistema de supervisión en tiempo real.',
+    },
+    {
+      tipo: 'valor',
+      titulo: 'Por qué es crítico',
+      contenido:
+        'Una infraestructura de comunicaciones deficiente es el punto más común de falla en la automatización. Al integrar redes industriales protocolizadas, evitamos la pérdida de datos y aseguramos la continuidad operacional, aunque se usen equipos de distintos fabricantes.',
+      parrafoExtra:
+        'Nuestras redes se validan con pruebas de conectividad antes del arranque, como parte del ciclo de pruebas en fábrica y terreno.',
+      foto: { src: 'comunicaciones-fibra', alt: 'Enlaces de fibra óptica rotulados en un gabinete de comunicaciones' },
+      enlace: { texto: 'Conoce nuestras pruebas en fábrica y en terreno', href: '/pruebas-fat-sat-y-comisionamiento/' },
+    },
+    {
+      tipo: 'pruebas-fondo',
+      titulo: 'Pruebas en fábrica y terreno',
+      contenido:
+        'Cada red de comunicación industrial se valida con pruebas de conectividad y tráfico antes del arranque. La verificación se integra al ciclo FAT del proyecto y, cuando corresponde, se complementa con comisionamiento en terreno.',
+    },
+    {
+      tipo: 'faq',
+      titulo: 'Preguntas frecuentes',
+      variante: 'blanco',
+      items: [
+        {
+          pregunta: '¿Integran equipos de distintas marcas en la misma red?',
+          respuesta: 'Sí. Configuramos la red para que equipos de distintas marcas se comuniquen de forma eficiente.',
+        },
+        {
+          pregunta: '¿Incluyen fibra óptica en sus instalaciones?',
+          respuesta:
+            'Sí, implementamos enlaces de fibra óptica para largas distancias o entornos con alta interferencia electromagnética.',
+        },
+        {
+          pregunta: '¿Qué protocolos manejan?',
+          respuesta:
+            'Trabajamos con los protocolos más extendidos de la industria y los integramos según la necesidad del proyecto y la compatibilidad de los equipos.',
+        },
+      ],
+    },
+  ]}
+  bandaFinal={{
+    titulo: '¿Necesitas conectar tu planta con una red de comunicación industrial robusta?',
+    palabraAcento: 'robusta',
+    botonTexto: 'Conversemos tu proyecto',
+  }}
+/>

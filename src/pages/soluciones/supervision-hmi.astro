@@ -1,11 +1,88 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import PaginaSolucion from '~/components/telectrich/PaginaSolucion.astro';
 
-// Estructura de I1: el contenido llega desde los copies aprobados (ver plan-i1.md del vault).
-const metadata = { title: 'Supervisión y HMI' };
+const metadata = {
+  title: 'Supervisión industrial con pantalla HMI | Telectrich',
+  description:
+    'Supervisión industrial con pantalla HMI: visualización de estados, gestión de alarmas y comandos de operación.',
+};
 ---
 
-<Layout metadata={metadata}>
-  <HeroText title="Supervisión y HMI" />
-</Layout>
+<PaginaSolucion
+  metadata={metadata}
+  migas={[{ texto: 'Inicio', href: '/' }, { texto: 'Soluciones', href: '/soluciones/' }, { texto: 'Supervisión HMI' }]}
+  ramalIluminado={3}
+  heroFoto="hmi-nema4x"
+  heroAlt="Puerta de un tablero con pantalla HMI y botonera"
+  heroObjectPosition="50% 38%"
+  heroAncho={1400}
+  heroAlto={1866}
+  titulo="Supervisión industrial con HMI"
+  palabraAcento="HMI"
+  lead="Visualiza tu proceso en tiempo real y toma decisiones informadas con interfaces de operación claras y robustas."
+  ctaPrimario="Cotizar sistema de supervisión"
+  secciones={[
+    {
+      tipo: 'definicion',
+      titulo: '¿Qué es la supervisión industrial?',
+      contenido:
+        'La supervisión y operación es la capa final de la arquitectura de automatización. Consiste en desplegar interfaces HMI que entregan información crítica del proceso en tiempo real y permiten al operador interactuar con los equipos, enviar comandos y monitorear la salud de la planta desde un punto local o remoto.',
+    },
+    {
+      tipo: 'paneles-alcance',
+      titulo: 'Qué incluye nuestra oferta',
+      intro:
+        'Desarrollamos la interfaz entre el operador y la máquina, con foco en la claridad de la información y la eficiencia de la operación.',
+      paneles: [
+        {
+          tag: 'VIS',
+          titulo: 'Visualización de estados y variables',
+          desc: 'Pantallas que muestran el estado actual de los equipos, las variables de proceso (presión, temperatura, flujo) y los flujos de trabajo.',
+        },
+        {
+          tag: 'HMI',
+          titulo: 'Panel de operador HMI',
+          desc: 'Integración de pantallas HMI (Human-Machine Interface), físicas y virtuales, optimizadas para el acceso rápido a funciones críticas.',
+        },
+        {
+          tag: 'ALM',
+          titulo: 'Gestión de alarmas',
+          desc: 'Configuración y priorización de las alarmas del proceso, para que el operador identifique fallas de inmediato y actúe según el protocolo de seguridad.',
+        },
+      ],
+    },
+    {
+      tipo: 'integracion',
+      titulo: 'Arquitectura conectada',
+      contenido:
+        'La supervisión cierra el ciclo de automatización: recibe datos del tablero de control a través de la red industrial y transforma señales eléctricas en información visual útil. La plataforma se selecciona según el hardware de control del proyecto, y la interfaz se valida durante el comisionamiento.',
+      enlaces: [
+        { texto: 'Ver tableros de control', href: '/soluciones/tableros-de-control/' },
+        { texto: 'Ver comunicación industrial', href: '/soluciones/comunicacion-industrial/' },
+        { texto: 'Servicios de terreno', href: '/pruebas-fat-sat-y-comisionamiento/' },
+      ],
+    },
+    {
+      tipo: 'faq',
+      titulo: 'Preguntas frecuentes',
+      variante: 'fondo',
+      items: [
+        {
+          pregunta: '¿Con qué marcas trabajan?',
+          respuesta:
+            'Elegimos la plataforma de supervisión según el control del proyecto; trabajamos habitualmente con equipos de Siemens, Rockwell Automation y Schneider Electric.',
+        },
+        {
+          pregunta: '¿La supervisión se prueba antes de la puesta en marcha?',
+          respuesta:
+            'Sí. La interfaz de supervisión se valida durante el comisionamiento del sistema de control, para asegurar que cada alarma y cada comando respondan correctamente en tiempo real.',
+        },
+      ],
+    },
+  ]}
+  bandaFinal={{
+    titulo: '¿Necesitas una interfaz de supervisión para tu proceso?',
+    palabraAcento: 'interfaz',
+    botonTexto: 'Conversemos tu proyecto',
+  }}
+/>
